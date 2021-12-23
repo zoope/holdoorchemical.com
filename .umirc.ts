@@ -36,14 +36,18 @@ export default defineConfig({
   outputPath: '/docs',
   publicPath: '/',
   theme: {
-    '@primary-color': '#1faead',
+    '@primary-color': '#059',
   },
   routes: [
     {
       path: '/',
       component: '@/layouts/index',
       routes: [
-        { path: '/', component: '@/pages/home/index', title: 'holdoormedical' },
+        {
+          path: '/',
+          component: '@/pages/home/index',
+          title: 'holdoorchemical',
+        },
         {
           path: '/contact_us',
           component: '@/pages/contact/index',

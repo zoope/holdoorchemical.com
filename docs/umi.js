@@ -32143,13 +32143,13 @@
             {
               path: '/index.html',
               component: n('lggp').default,
-              title: 'holdoormedical',
+              title: 'holdoorchemical',
               exact: !0,
             },
             {
               path: '/',
               component: n('lggp').default,
-              title: 'holdoormedical',
+              title: 'holdoorchemical',
               exact: !0,
             },
             {
