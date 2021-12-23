@@ -1,0 +1,164 @@
+@import './base.less';
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+  -webkit-text-size-adjust: 100%;
+  font-weight: 400;
+}
+
+ul,
+ol,
+li {
+  padding: 0;
+  list-style: none;
+}
+
+.header {
+  height: 100px;
+  position: fixed;
+  background-color: #fff;
+  width: 100%;
+  z-index: 99;
+  box-shadow: 0 6px 16px -8px #00000014, 0 9px 28px #0000000d,
+    0 12px 48px 16px #00000008;
+
+  .container {
+    .container();
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    width: 240px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'roboto', 'bold';
+    color: #31c6a5;
+    font-size: 26px;
+    font-weight: bolder;
+
+    img {
+      width: 40px;
+    }
+  }
+
+  .menu {
+    font-size: 16px;
+    flex: 1;
+    justify-content: flex-end;
+
+    li {
+      padding: 0 10px !important;
+    }
+  }
+
+  :global {
+    .ant-menu-horizontal {
+      border-bottom: none;
+      background: transparent;
+    }
+  }
+}
+
+.content {
+  padding-top: 100px;
+  min-width: 1200px;
+}
+
+.footer {
+  height: 60px;
+  background-color: rgb(45, 57, 63);
+  color: #a0a9b1;
+  clear: both;
+  min-width: 1200px;
+
+  .container {
+    .container();
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.top {
+  width: 100%;
+  height: 300px;
+  float: left;
+  background-image: url(/images/icon/main_bg.png);
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .content {
+    position: relative;
+    width: 1200px;
+    height: 300px;
+    margin: 0 auto;
+    padding: 0;
+
+    h1 {
+      height: 75px;
+      margin-top: 225px;
+      padding-right: 50px;
+      padding-left: 15px;
+      float: left;
+      padding-bottom: 15px;
+      font-family: 'Raleway', sans-serif;
+      color: #fff;
+      font-size: 28px;
+      font-weight: 400;
+      background-color: rgba(0, 0, 0, 0.5);
+      background-image: url('/images/icon/trenner_rot.png');
+      background-position: 15px 60px;
+      background-repeat: no-repeat;
+      line-height: 60px;
+    }
+
+    .back {
+      float: right;
+      margin-top: 241px;
+      margin-right: 20px;
+      background-color: @main-color;
+      padding-top: 13px;
+      padding-bottom: 13px;
+      padding-left: 20px;
+      padding-right: 20px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.5em;
+      text-transform: uppercase;
+      font-weight: Medium;
+      font-family: 'roboto', 'regular';
+      cursor: pointer;
+    }
+  }
+}
+
+.breadcrumb {
+  background-color: rgb(45, 57, 63);
+  height: auto;
+  padding: 20px 0px;
+  color: #ffffff;
+  font-size: 14px;
+  clear: both;
+
+  :global {
+    .ant-breadcrumb {
+      .container();
+
+      &::before {
+        content: 'You are here : ';
+        color: #fff;
+      }
+    }
+
+    .ant-breadcrumb-link,
+    .ant-breadcrumb-link a,
+    .ant-breadcrumb-separator {
+      color: #fff;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@main-color: #1faead;
+
+.container {
+  width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.li-style {
+  li {
+    position: relative;
+    padding-left: 20px;
+  }
+  li::before {
+    background-image: url(/images/icon/right.svg);
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    content: '';
+    height: 100%;
+    width: 20px;
+    position: absolute;
+    left: 0;
+  }
+}

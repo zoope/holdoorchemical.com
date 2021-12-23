@@ -1,0 +1,96 @@
+@import '../../layouts/base.less';
+
+.contact_us {
+  .topic {
+    .container();
+    clear: both;
+    text-align: center;
+    background-color: #ffffff;
+    padding: 75px 0 0;
+    // .above {
+    //   color: @main-color;
+    //   font-weight: 600;
+    //   font-size: 30px;
+    //   padding-bottom: 10px;
+    //   text-transform: uppercase;
+    // }
+
+    h2 {
+      background-position: center bottom;
+      text-transform: uppercase;
+      padding-bottom: 15px;
+      margin-bottom: 35px;
+      background-image: url(/images/icon/trenner_rot.png);
+      background-repeat: no-repeat;
+      background-size: 140px 1px;
+      font-size: 32px;
+      font-family: 'Raleway', sans-serif;
+      line-height: 42px;
+      font-weight: 300;
+      color: rgb(45, 57, 63);
+    }
+  }
+}
+
+.wrap {
+  .container();
+  display: flex;
+  justify-content: center;
+  padding-bottom: 75px;
+}
+
+.company {
+  color: #656565;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.content {
+  color: #656565;
+  width: 230px;
+  margin-left: -25px;
+
+  &.big {
+    width: 350px;
+    font-size: 20px;
+
+    & > div {
+      background-size: 18px;
+      background-position: left 6px;
+    }
+  }
+
+  & > div {
+    background-position: left 2.5px;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    margin-bottom: 20px;
+    padding-left: 25px;
+  }
+
+  .address {
+    background-image: url(/images/icon/house.svg);
+  }
+
+  .tel {
+    background-image: url(/images/icon/tel.svg);
+  }
+
+  .phone {
+    background-image: url(/images/icon/phone.svg);
+    background-size: 20px;
+  }
+
+  .email {
+    background-image: url(/images/icon/email.svg);
+
+    a {
+      color: #656565;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
