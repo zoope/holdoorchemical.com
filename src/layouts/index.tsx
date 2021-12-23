@@ -85,7 +85,7 @@ export default (props: any) => {
           </Menu>
         </div>
       </header>
-      <div className={style.content}>{props.children}</div>
+      <div className={style['content-wrap']}>{props.children}</div>
       <footer className={style.footer}>
         <div className={style.container}>
           <span>HOLDOOR MEDICAL 2021</span>

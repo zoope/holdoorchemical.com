@@ -230,7 +230,7 @@
               }),
             }),
             Object(u['jsx'])('div', {
-              className: l.a.content,
+              className: l.a['content-wrap'],
               children: e.children,
             }),
             Object(u['jsx'])('footer', {
@@ -3091,6 +3091,7 @@
     e.exports = {
       container: 'container___GOeHJ',
       'li-style': 'li-style___1ENYn',
+      'title-with-line': 'title-with-line___2FbiN',
       contact_us: 'contact_us___3kwlr',
       topic: 'topic___2tB3r',
       wrap: 'wrap___3kGJR',
@@ -12098,12 +12099,14 @@
     e.exports = {
       container: 'container___erFot',
       'li-style': 'li-style___3dRbo',
+      'title-with-line': 'title-with-line___1sSvh',
       header: 'header___2_57M',
       logo: 'logo___DN8vc',
       menu: 'menu___1N3HW',
-      content: 'content___2QN8t',
+      'content-wrap': 'content-wrap___3Kehv',
       footer: 'footer___2oaYO',
       top: 'top___JU1YA',
+      content: 'content___2QN8t',
       back: 'back___2Y3Zw',
       breadcrumb: 'breadcrumb___-YH9G',
     };
@@ -17522,6 +17525,7 @@
     e.exports = {
       container: 'container___3aJaL',
       'li-style': 'li-style___q0TrU',
+      'title-with-line': 'title-with-line___3DLIr',
       banner: 'banner___3Un5s',
       bg: 'bg___1voNH',
       'left-arrow': 'left-arrow___3ySpa',
@@ -18074,6 +18078,7 @@
     e.exports = {
       container: 'container___3aCAH',
       'li-style': 'li-style___TtzlT',
+      'title-with-line': 'title-with-line___1tLIZ',
       main: 'main___2DyF1',
       'left-side': 'left-side___1zpFF',
       title: 'title___1Ocrf',
@@ -23512,6 +23517,7 @@
     e.exports = {
       container: 'container___zov-8',
       'li-style': 'li-style___3rGDL',
+      'title-with-line': 'title-with-line___lj7mq',
       'tag-a': 'tag-a___1ycy3',
       content: 'content___20nVu',
       'left-side': 'left-side___3vhLU',
@@ -29689,7 +29695,7 @@
                 children: [
                   Object(c['jsx'])('div', {
                     className: o.a.title,
-                    children: 'Category',
+                    children: 'Contact us',
                   }),
                   Object(c['jsx'])(a['a'], {}),
                 ],

@@ -16,7 +16,7 @@ export default function Product(props) {
       <SubHeader title={productData.title} />
       <div className={styles.main}>
         <section className={styles['left-side']}>
-          <div className={styles.title}>Category</div>
+          <div className={styles.title}>Contact us</div>
           <Contact />
         </section>
         <section className={styles.product}>

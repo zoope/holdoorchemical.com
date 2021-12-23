@@ -3,6 +3,11 @@ import { defineConfig } from 'umi';
 import products from './src/config/products.json';
 import categories from './src/config/category.json';
 
+/**
+ * define the theme color
+ */
+const themeColor = '#059';
+
 const allCategories: any = [];
 const expendArray = (arr: any) => {
   arr.forEach((item: any) => {
@@ -36,7 +41,13 @@ export default defineConfig({
   outputPath: '/docs',
   publicPath: '/',
   theme: {
-    '@primary-color': '#059',
+    '@primary-color': themeColor,
+  },
+  lessLoader: {
+    modifyVars: {
+      '@main-color': themeColor,
+      '@main-color-min': JSON.stringify(themeColor.substring(1)),
+    },
   },
   routes: [
     {
