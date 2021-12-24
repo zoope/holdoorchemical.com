@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { useState } from 'react';
 import products from '../config/products.json';
 import categories from '../config/category.json';
 import { Menu } from 'antd';
@@ -42,10 +42,12 @@ export default (props: any) => {
   const { pathname } = props.location;
   const categoryCode = pathname.match(/\/category\/([\d]*)/)?.[1];
 
+  const [headerActive, setHeaderActive] = useState(false);
+
   const pushRoute = (path: string) => history.push(path);
   return (
     <>
-      <header className={style.header}>
+      <header className={`${style.header} ${headerActive ? style.active : ''}`}>
         <div className={style.container}>
           <div className={style.logo}>
             <img src="/images/icon/logo.png" alt="" />
@@ -55,6 +57,8 @@ export default (props: any) => {
             mode="horizontal"
             className={style.menu}
             selectedKeys={[props.location.pathname]}
+            onMouseEnter={() => setHeaderActive(true)}
+            onMouseLeave={() => setHeaderActive(false)}
           >
             <Menu.Item key="/" onClick={() => pushRoute('/')}>
               HOME
