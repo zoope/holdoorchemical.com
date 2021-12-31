@@ -156,7 +156,15 @@
             e.children && h(e.children, e);
         });
       };
-    h(l),
+    h(l);
+    var v = (e, t) => {
+      e[0].children.forEach((e) => {
+        t.forEach((t) => {
+          t.category.includes(e.code) && e.children.push(t);
+        });
+      });
+    };
+    v(l, a),
       (window.products = a),
       (window.productsCfg = d),
       (window.categoryCfg = p),
@@ -205,10 +213,23 @@
                       ),
                       l[0].children.map((e) =>
                         Object(f['jsx'])(
-                          r['a'].Item,
+                          r['a'].SubMenu,
                           {
-                            onClick: () => h('/category/'.concat(e.code)),
-                            children: e.title,
+                            title: e.title,
+                            onTitleClick: () => h('/category/'.concat(e.code)),
+                            children:
+                              e.children &&
+                              e.children.map((e) =>
+                                Object(f['jsx'])(
+                                  r['a'].Item,
+                                  {
+                                    onClick: () =>
+                                      h('/product/'.concat(e.code)),
+                                    children: e.title,
+                                  },
+                                  '/category/'.concat(e.code),
+                                ),
+                              ),
                           },
                           '/category/'.concat(e.code),
                         ),
@@ -388,8 +409,8 @@
       P = 1,
       A = null,
       _ = 3,
-      N = !1,
       R = !1,
+      N = !1,
       I = !1;
     function M(e) {
       for (var t = j(T); null !== t; ) {
@@ -402,15 +423,15 @@
       }
     }
     function L(e) {
-      if (((I = !1), M(e), !R))
-        if (null !== j(C)) (R = !0), r(F);
+      if (((I = !1), M(e), !N))
+        if (null !== j(C)) (N = !0), r(F);
         else {
           var t = j(T);
           null !== t && o(L, t.startTime - e);
         }
     }
     function F(e, n) {
-      (R = !1), I && ((I = !1), i()), (N = !0);
+      (N = !1), I && ((I = !1), i()), (R = !0);
       var r = _;
       try {
         for (
@@ -436,7 +457,7 @@
         }
         return c;
       } finally {
-        (A = null), (_ = r), (N = !1);
+        (A = null), (_ = r), (R = !1);
       }
     }
     var D = a;
@@ -450,7 +471,7 @@
         e.callback = null;
       }),
       (t.unstable_continueExecution = function () {
-        R || N || ((R = !0), r(F));
+        N || R || ((N = !0), r(F));
       }),
       (t.unstable_getCurrentPriorityLevel = function () {
         return _;
@@ -534,7 +555,7 @@
             ? ((e.sortIndex = a),
               x(T, e),
               null === j(C) && e === j(T) && (I ? i() : (I = !0), o(L, a - l)))
-            : ((e.sortIndex = c), x(C, e), R || N || ((R = !0), r(F))),
+            : ((e.sortIndex = c), x(C, e), N || R || ((N = !0), r(F))),
           e
         );
       }),
@@ -772,8 +793,8 @@
         P = a['useState'](),
         A = Object(m['a'])(P, 2),
         _ = A[0],
-        N = A[1],
-        R = 'visible' in e ? E : _,
+        R = A[1],
+        N = 'visible' in e ? E : _,
         I = a['useRef'](null);
       a['useImperativeHandle'](t, function () {
         return I.current;
@@ -786,11 +807,11 @@
         L = function (t) {
           var n = e.onOverlayClick,
             r = M().props;
-          N(!1), n && n(t), r.onClick && r.onClick(t);
+          R(!1), n && n(t), r.onClick && r.onClick(t);
         },
         F = function (t) {
           var n = e.onVisibleChange;
-          N(t), 'function' === typeof n && n(t);
+          R(t), 'function' === typeof n && n(t);
         },
         D = function () {
           var e = M(),
@@ -848,7 +869,7 @@
             popupAlign: f,
             popupTransitionName: c,
             popupAnimation: s,
-            popupVisible: R,
+            popupVisible: N,
             stretch: B() ? 'minWidth' : '',
             popup: U(),
             onPopupVisibleChange: F,
@@ -865,10 +886,10 @@
       P = n('U8pU'),
       A = n('bT9E'),
       _ = n('H84U'),
-      N = n('1OyB'),
-      R = function e(t) {
+      R = n('1OyB'),
+      N = function e(t) {
         return (
-          Object(N['a'])(this, e),
+          Object(R['a'])(this, e),
           new Error('unreachable case: '.concat(JSON.stringify(t)))
         );
       },
@@ -909,7 +930,7 @@
             case void 0:
               break;
             default:
-              console.warn(new R(s));
+              console.warn(new N(s));
           }
           var v = u()(
             p,
@@ -964,7 +985,7 @@
       function n() {
         var e;
         return (
-          Object(N['a'])(this, n),
+          Object(R['a'])(this, n),
           (e = t.apply(this, arguments)),
           (e.containerRef = a['createRef']()),
           (e.animationStart = !1),
@@ -1300,8 +1321,8 @@
           S = a['useContext'](ee['b']),
           C = a['useState'](!!c),
           T = Object(m['a'])(C, 2),
-          N = T[0],
-          R = T[1],
+          R = T[0],
+          N = T[1],
           I = a['useState'](!1),
           M = Object(m['a'])(I, 2),
           L = M[0],
@@ -1327,9 +1348,9 @@
               clearTimeout(H.current),
                 'number' === typeof i
                   ? (H.current = window.setTimeout(function () {
-                      R(i);
+                      N(i);
                     }, i))
-                  : R(i);
+                  : N(i);
             },
             [i],
           ),
@@ -1338,7 +1359,7 @@
           var n,
             r = e.onClick,
             o = e.disabled;
-          N || o
+          R || o
             ? t.preventDefault()
             : null === (n = r) || void 0 === n || n(t);
         };
@@ -1368,7 +1389,7 @@
           default:
             break;
         }
-        var Q = N ? 'loading' : b,
+        var Q = R ? 'loading' : b,
           J = u()(
             G,
             ((n = {}),
@@ -1377,7 +1398,7 @@
             Object(o['a'])(n, ''.concat(G, '-').concat($), $),
             Object(o['a'])(n, ''.concat(G, '-icon-only'), !y && 0 !== y && !!Q),
             Object(o['a'])(n, ''.concat(G, '-background-ghost'), w && !fe(f)),
-            Object(o['a'])(n, ''.concat(G, '-loading'), N),
+            Object(o['a'])(n, ''.concat(G, '-loading'), R),
             Object(o['a'])(n, ''.concat(G, '-two-chinese-chars'), L && Y),
             Object(o['a'])(n, ''.concat(G, '-block'), k),
             Object(o['a'])(n, ''.concat(G, '-dangerous'), !!d),
@@ -1386,12 +1407,12 @@
             v,
           ),
           te =
-            b && !N
+            b && !R
               ? b
               : a['createElement'](ae, {
                   existIcon: !!b,
                   prefixCls: G,
-                  loading: !!N,
+                  loading: !!R,
                 }),
           ne = y || 0 === y ? he(y, W() && Y) : null,
           re = Object(A['a'])(E, ['navigate']);
@@ -1456,8 +1477,8 @@
           C = e.buttonsRender,
           P = e.mouseEnterDelay,
           A = e.mouseLeaveDelay,
-          N = e.overlayClassName,
-          R = e.overlayStyle,
+          R = e.overlayClassName,
+          N = e.overlayStyle,
           I = ge(e, [
             'prefixCls',
             'type',
@@ -1492,8 +1513,8 @@
             getPopupContainer: k || n,
             mouseEnterDelay: P,
             mouseLeaveDelay: A,
-            overlayClassName: N,
-            overlayStyle: R,
+            overlayClassName: R,
+            overlayStyle: N,
           };
         'visible' in e && (L.visible = g),
           (L.placement =
@@ -1753,7 +1774,7 @@
         }
         return n;
       };
-    function Ne(e, t) {
+    function Re(e, t) {
       if (!e.breadcrumbName) return null;
       var n = Object.keys(t).join('|'),
         r = e.breadcrumbName.replace(
@@ -1764,9 +1785,9 @@
         );
       return r;
     }
-    function Re(e, t, n, r) {
+    function Ne(e, t, n, r) {
       var o = n.indexOf(e) === n.length - 1,
-        i = Ne(e, t);
+        i = Re(e, t);
       return o
         ? a['createElement']('span', null, i)
         : a['createElement']('a', { href: '#/'.concat(r.join('/')) }, i);
@@ -1798,7 +1819,7 @@
           d = e.routes,
           p = e.children,
           h = e.itemRender,
-          v = void 0 === h ? Re : h,
+          v = void 0 === h ? Ne : h,
           y = e.params,
           m = void 0 === y ? {} : y,
           b = _e(e, [
@@ -1880,18 +1901,20 @@
       var t = e.title,
         n = e.showBack,
         r = void 0 === n || n,
-        o = Object(Ue['a'])(e, ['title', 'showBack']),
-        i = () => {
+        o = e.type,
+        i = void 0 === o ? 'products' : o,
+        l = Object(Ue['a'])(e, ['title', 'showBack', 'type']),
+        c = () => {
           Ve['a'].goBack();
         },
-        l = () => {
+        u = () => {
           var e,
             t,
-            n = o.location.pathname,
+            n = l.location.pathname,
             r = [],
-            i = window.productsCfg,
-            a = window.categoryCfg,
-            l =
+            o = window.productsCfg,
+            i = window.categoryCfg,
+            a =
               null === (e = n.match(/\/product\/([\d]*)/)) || void 0 === e
                 ? void 0
                 : e[1],
@@ -1899,17 +1922,17 @@
               null === (t = n.match(/\/category\/([\d]*)/)) || void 0 === t
                 ? void 0
                 : t[1];
-          if (l) {
-            i[l].category;
-            r = i[l].category.map((e) => ({
-              name: a[e].title,
-              path: '/category/'.concat(a[e].code),
+          if (a) {
+            o[a].category;
+            r = o[a].category.map((e) => ({
+              name: i[e].title,
+              path: '/category/'.concat(i[e].code),
             }));
           }
           return (
             c &&
-              a[c].parent &&
-              (r = a[c].parent.map((e) => ({
+              i[c].parent &&
+              (r = i[c].parent.map((e) => ({
                 name: e.title,
                 path: '/category/'.concat(e.code),
               }))),
@@ -1926,11 +1949,15 @@
               ),
             )
           );
-        };
+        },
+        s = { products: 'banner_0', contact: 'banner_1' };
       return Object(We['jsxs'])(a['Fragment'], {
         children: [
           Object(We['jsx'])('section', {
             className: ze.a.top,
+            style: {
+              backgroundImage: 'url(/images/icon/'.concat(s[i], '.png)'),
+            },
             children: Object(We['jsxs'])('div', {
               className: ze.a.content,
               children: [
@@ -1938,7 +1965,7 @@
                 r &&
                   Object(We['jsx'])('div', {
                     className: ze.a.back,
-                    onClick: i,
+                    onClick: c,
                     children: 'RETURN',
                   }),
               ],
@@ -1954,7 +1981,7 @@
                     children: 'Home',
                   }),
                 }),
-                l(),
+                u(),
                 Object(We['jsx'])(De.Item, { children: t }),
               ],
             }),
@@ -3328,9 +3355,9 @@
       P = n('5mdu'),
       A = n('afO8'),
       _ = n('lMq5'),
-      N = n('tiKp'),
-      R = n('LQDL'),
-      I = N('species'),
+      R = n('tiKp'),
+      N = n('LQDL'),
+      I = R('species'),
       M = 'Promise',
       L = A.get,
       F = A.set,
@@ -3354,11 +3381,11 @@
       te = _(M, function () {
         var e = w(U) !== String(U);
         if (!e) {
-          if (66 === R) return !0;
+          if (66 === N) return !0;
           if (!K && 'function' != typeof PromiseRejectionEvent) return !0;
         }
         if (c && !U.prototype['finally']) return !0;
-        if (R >= 51 && /native code/.test(U)) return !1;
+        if (N >= 51 && /native code/.test(U)) return !1;
         var t = U.resolve(1),
           n = function (e) {
             e(
@@ -3739,11 +3766,11 @@
       _ = function (e) {
         return l(e) && c(P, u(e));
       },
-      N = function (e) {
+      R = function (e) {
         if (_(e)) return e;
         throw TypeError('Target is not a typed array');
       },
-      R = function (e) {
+      N = function (e) {
         if (h) {
           if (j.call(O, e)) return e;
         } else
@@ -3800,8 +3827,8 @@
     e.exports = {
       NATIVE_ARRAY_BUFFER_VIEWS: C,
       TYPED_ARRAY_TAG: T && S,
-      aTypedArray: N,
-      aTypedArrayConstructor: R,
+      aTypedArray: R,
+      aTypedArrayConstructor: N,
       exportTypedArrayMethod: I,
       exportTypedArrayStaticMethod: M,
       isView: A,
@@ -4158,8 +4185,8 @@
     var P = '[-\\+]?\\d+%?',
       A = '[-\\+]?\\d*\\.\\d+%?',
       _ = '(?:' + A + ')|(?:' + P + ')',
-      N = '[\\s|\\(]+(' + _ + ')[,|\\s]+(' + _ + ')[,|\\s]+(' + _ + ')\\s*\\)?',
-      R =
+      R = '[\\s|\\(]+(' + _ + ')[,|\\s]+(' + _ + ')[,|\\s]+(' + _ + ')\\s*\\)?',
+      N =
         '[\\s|\\(]+(' +
         _ +
         ')[,|\\s]+(' +
@@ -4171,12 +4198,12 @@
         ')\\s*\\)?',
       I = {
         CSS_UNIT: new RegExp(_),
-        rgb: new RegExp('rgb' + N),
-        rgba: new RegExp('rgba' + R),
-        hsl: new RegExp('hsl' + N),
-        hsla: new RegExp('hsla' + R),
-        hsv: new RegExp('hsv' + N),
-        hsva: new RegExp('hsva' + R),
+        rgb: new RegExp('rgb' + R),
+        rgba: new RegExp('rgba' + N),
+        hsl: new RegExp('hsl' + R),
+        hsla: new RegExp('hsla' + N),
+        hsv: new RegExp('hsv' + R),
+        hsva: new RegExp('hsva' + N),
         hex3: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
         hex6: /^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/,
         hex4: /^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/,
@@ -4795,7 +4822,7 @@
   },
   '8BOu': function (e) {
     e.exports = JSON.parse(
-      "[{\"code\":\"100001\",\"title\":\"Silicone oil(PDMS)\",\"avatar\":\"/images/100001.PNG\",\"category\":[\"0\",\"10001\"],\"content\":\"<table><tbody><tr class='firstRow'><td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'>Product</td><td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'>Brand</td><td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'>Viscosity (CST)</td><td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'>Features and application</td></tr><tr><td width='232' valign='top' style='-ms-word-break: break-all;' rowspan='3' colspan='1'>Dimethyl silicone fluid</td><td width='232' valign='top' style='-ms-word-break: break-all;'>FUTURSIL/DOW/WACKER</td><td width='232' valign='top' style='-ms-word-break: break-all;'>0.65CST, 2CST, 4CST, 10CST, 20CST</td><td width='232' valign='top' style='-ms-word-break: break-all;' rowspan='3' colspan='1'>The most typical type of silicone fluid oil product. PDMS is used in textile assistantsilicone based lubricants,defoaming agents, mold release agents, damping fluids, heat transfer fluids, polishes, cosmetics</td></tr><tr><td width='232' valign='top' style='-ms-word-break: break-all;'>FUTURSIL/DOW/WACKER/ BLUESTAR/SHINETSU</td><td width='232' valign='top' style='-ms-word-break: break-all;'>50CST, 100CST, 350CST, 500CST, 1000CST</td></tr><tr><td width='232' valign='top' style='-ms-word-break: break-all;'>FUTYRSIL/DOW/ WACKER</td><td width='232' valign='top' style='-ms-word-break: break-all;'>5000CST, 12500CST, 30000CST, 60000CST, 330000CST, 500000CST</td></tr></tbody></table><p><br/></p>\"},{\"code\":\"100002\",\"title\":\"OH polymer\",\"avatar\":\"/images/100002.png\",\"category\":[\"0\",\"10001\"],\"content\":\"<table> <tbody> <tr class='firstRow'> <td width='316' valign='top' style='-ms-word-break: break-all;'> Brand<br/> </td> <td width='316' valign='top' style='-ms-word-break: break-all;'> Viscosity (CST)<br/> </td> <td width='316' valign='top' style='-ms-word-break: break-all;'> Features and application </td> </tr> <tr> <td width='316' valign='top' style='-ms-word-break: break-all;' rowspan='4' colspan='1'> FUTURSIL/DOW/WACKER </td> <td width='316' valign='top' style='-ms-word-break: break-all;'> 6000CST<br/> </td> <td width='316' valign='top' style='-ms-word-break: break-all;' rowspan='4' colspan='1'> Used in pottiing for electric and electronic components for insulation, shock absorption and moisture proof purpose, caulking&amp;sealing for bulidings,mold release agent, adhesiveand paper coating </td> </tr> <tr> <td width='316' valign='top' style='-ms-word-break: break-all;'> 2000OCST<br/> </td> </tr> <tr> <td width='316' valign='top' style='-ms-word-break: break-all;'> 50000CST<br/> </td> </tr> <tr> <td width='316' valign='top' style='-ms-word-break: break-all;'> 70000CST<br/> </td> </tr> </tbody> </table> <p></p>\"},{\"code\":\"100003\",\"title\":\"Silicone emulsion\",\"avatar\":\"/images/100003.png\",\"category\":[\"0\",\"10001\"],\"content\":\"<table> <tbody> <tr class='firstRow'> <td width='181' valign='top' style='-ms-word-break: break-all;'> Product </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Brand </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Catalog No. </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Nonvolatile content </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Features and application </td> </tr> <tr> <td width='181' valign='top'> Silicone wax </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> DOW </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> MEM-1728 </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 97% </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> A silicone / organic wax dispersion used to lubricate polyester sewing threads. Provides uniform distribution over the entire thread surface resulting in thread with low friction characteristics. </td> </tr> <tr> <td width='181' valign='top' rowspan='3' colspan='1'> Silicone flui<span style='font-size: 14px;'></span>d emulsion </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> BLUESTAR </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> MEUL360 </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> \u226560% </td> <td width='181' valign='top' style='-ms-word-break: break-all;' rowspan='3' colspan='1'> A 60% actives non-ionic emulsion formulated with a polydimethlsiloxane. Applications include mold release of rubber or plastic parts (stoppers, screw tops, bungs, etc.), lubrication of extruded rubber parts conveyor belts, textile lubricant for yarn manufacture, sewing thread lubrication, hosiery manufacture, sewing needle. </td> </tr> <tr> <td width='181' valign='top' style='-ms-word-break: break-all;'> DOW </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> MEM-0349 </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> \u226560% </td> </tr> <tr> <td width='181' valign='top' style='-ms-word-break: break-all;'> WACKER </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> E3560 </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> \u226560% </td> </tr> </tbody> </table> <p> <br/> </p>\"},{\"code\":\"100004\",\"title\":\"Silicone Intermediates\",\"avatar\":\"/images/100004.png\",\"category\":[\"0\",\"10001\"],\"content\":\"<table width='-403'> <tbody> <tr class='firstRow'> <td width='181' valign='top' style='-ms-word-break: break-all;'> Product </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Brand </td> <td width='350' valign='top' style='-ms-word-break: break-all;'> Features and application </td> </tr> <tr> <td width='181' valign='top' style='-ms-word-break: break-all;'> Linear </td> <td width='181' valign='top' style='-ms-word-break: break-all;' rowspan='2' colspan='1'> DOW/WACKER/BLUESTAR </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Low viscosity, reactive silanol fluid </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> D4 </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> A base fluid in a number of personal care products, with excellent spreading and lubrication properties and unique volatility characteristics.Can be used in antiperspirants, deodorants, skin creams, lotions, bath oils, suntan and <br/>shaving products, make-up, nail polishes.In hair sprays; faster drying time in low VOC formula. </td> </tr> </tbody> </table> <p></p>\"},{\"code\":\"100005\",\"title\":\"Block silicone oil\",\"avatar\":\"/images/100005.JPG\",\"category\":[\"0\",\"10001\"],\"content\":\"<table> <tbody> <tr class='firstRow'> <td width='181' valign='top' style='-ms-word-break: break-all;'> Brand </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Catalog No. </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Nonvolatile content </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> PH </td> <td width='450' valign='top' style='-ms-word-break: break-all;'> Features and application </td> </tr> <tr> <td width='181' valign='top' style='-ms-word-break: break-all;'> FURTURSIL </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> T18<br/> </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 60%<br/> </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 5-6<br/> </td> <td width='181' valign='top' style='-ms-word-break: break-all;' rowspan='2' colspan='1'> Smooth &amp; firm touch feel. Good product stabilityMake the fabric soft, smooth and full of natural feel, especially suitable for chemical fiber fleece and nylon fabrics </td> </tr> <tr> <td width='181' valign='top' style='-ms-word-break: break-all;'> FURTURSIL </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> T26<br/> </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 60%<br/> </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 8<br/> </td> </tr> </tbody> </table> <p></p>\"},{\"code\":\"100006\",\"title\":\"Amino silicone oil\",\"avatar\":\"/images/100006.PNG\",\"category\":[\"0\",\"10001\"],\"content\":\"<table width='-168'> <tbody> <tr class='firstRow'> <td width='148' valign='top' style='-ms-word-break: break-all;'> Brand<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Catalog No. </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Nitrogen </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Viscosity (CST) </td> <td width='450' valign='top' style='-ms-word-break: break-all;'> Features and application<br/> </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> BLUESTAR </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> C845 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 0.4 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 4500 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Silicone oil with diamine functions, mainly<br/>intended for the formulation of textile finishing emulsions. </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> BLUESTAR </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> C910 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 0.8 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 1500 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Specially developed for formulation to emulsions for textile softening. </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> DOW </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> OFX-8040 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 0.4 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 1000 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Suitable for formulation to a micro emulsion, and, in this form, can be applied to all types of woven or knitted fabric imparting a soft handle </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> DOW </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> OFX-8468 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 0.6 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 5000-15000 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> A 100% actives amino functional siloxane polymer. It is used primarily in textile softening applications. </td> </tr> <tr> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> DOW </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> OFX-8417 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 0.9 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 1200 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> Premium amino softener suitable for formulation into microemulsion which can be applied by exhaustion and padding as textile softener. </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> WACKER </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> WR301 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 0.27 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 1000 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Particularly suitable as active substance in softener formulations for the impregnation of fibers and textiles. </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> WACKER </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> WR1100 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 0.15 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 5000 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Particularly suitable as active substance in softener formulations for the impregnation of fibers and textiles. </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> WACKER </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> WR1200 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 0.24 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 7000 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Particularly suitable as active substance in softener formulations for the impregnation of PES-fibers and PES-textiles. </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> WACKER </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> WR1300 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 0.3 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 1000 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Particularly suitable as active substance in softener formulations for the impregnation of fibers and textiles. </td> </tr> </tbody> </table> <p> &nbsp; </p>\"},{\"code\":\"100007\",\"title\":\"Methyl hydrogen silicone oil\",\"avatar\":\"/images/100007.png\",\"category\":[\"0\",\"10001\"],\"content\":\"<table> <tbody> <tr class='firstRow'> <td width='181' valign='top' style='-ms-word-break: break-all;'> Brand </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Catalog No. </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Viscosity (CST) </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> SiH </td> <td width='550' valign='top' style='-ms-word-break: break-all;'> Features and application </td> </tr> <tr> <td width='181' valign='top' style='-ms-word-break: break-all;'> DOW </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> MHX-1107<br/> </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 30CST<br/> </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 1.4-1.75%<br/> </td> <td width='181' valign='top' style='-ms-word-break: break-all;' rowspan='2' colspan='1'> Water repellency processing of textile, glass, metal, and ceramic materials.&nbsp; Enhancenment of fluidity in various inorganic powers. </td> </tr> <tr> <td width='181' valign='top' style='-ms-word-break: break-all;'> XINAN </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 7202 </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 20CST<br/> </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 1.4-1.75% </td> </tr> </tbody> </table> <p> &nbsp; </p>\"},{\"code\":\"100008\",\"title\":\"Silicone defoamer\",\"avatar\":\"/images/100008.png\",\"category\":[\"0\",\"10001\"],\"content\":\"<table> <tbody> <tr class='firstRow'> <td width='180' valign='top' style='-ms-word-break: break-all;'> Brand<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Catalog No.<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Nonvolatile content </td> <td width='450' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> Features </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Application </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> DOW<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> AFE-3168<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> 30%<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> Good defoaming and anti-foaming performance, good dilution stability, suitable for a wide range of PH </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='5' colspan='1'> Pre-treatment, dyeing and printing, compound addition of additives </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> DOW<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> AFE-0050<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> 50%<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> Good defoaming and anti-foaming performance </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> WACKER<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> SRE<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> 33%<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> Good defoaming and anti-foaming performance, universal type </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> FUTURSIL<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> T-68<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> 30%<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> Better performance than 3168, better stability and foam suppression performance </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> FUTURSIL<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> T-50<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> 50%<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> Better performance than 0050, better stability and foam suppression performance </td> </tr> </tbody> </table> <p></p>\"},{\"code\":\"100009\",\"title\":\"AEO(Fatty alcohol polyoxyethylene ether)\",\"avatar\":\"/images/100009.jpg\",\"category\":[\"0\",\"10002\"],\"content\":\"<table> <tbody> <tr class='firstRow'> <td width='148' valign='top' style='-ms-word-break: break-all;'> Product<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Appearance </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> PH </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Cloud point </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> HLB </td> <td width='450' valign='top' style='-ms-word-break: break-all;'> Features and application </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> AEO-3<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Transparency liquid<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 6-7<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Insoluble<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 8.3<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Lipophilic emulsifier, widely used in oil synthesis and as emulsifier<br/> </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> AEO-5<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Transparency liquid </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 6-7<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 28<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 10.2<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;' rowspan='2' colspan='1'> Used in liquid detergents, degreasers, emulsifiers, wetting agents and dispersants, with high foaming and excellent degreasing performance<br/> </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> AEO-6<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Transparency liquid </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 6-7<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 33<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 11<br/> </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> AEO-7<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Transparency liquid </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 6-8<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 57<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 12.4<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;' rowspan='2' colspan='1'> With good emulsification, decontamination, water solubility and biodegradability, it is widely used in detergents and emulsifiers </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> AEO-9<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Paste </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 6-8<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 79<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 13.5<br/> </td> </tr> </tbody> </table> <p></p>\"},{\"code\":\"100010\",\"title\":\"NPE(nonylphenol polyoxyethylene ether)\",\"avatar\":\"/images/100010.jpg\",\"category\":[\"0\",\"10002\"],\"content\":\"<table> <tbody> <tr class='firstRow'> <td width='148' valign='top' style='-ms-word-break: break-all;'> Product </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Appearance </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> PH </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Cloud point </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> HLB </td> <td width='450' valign='top' style='-ms-word-break: break-all;'> Features and application </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> NP-4<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;' rowspan='7' colspan='1'> Colorless to light yellow liquid<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;' rowspan='9' colspan='1'> 6-7<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Insoluble </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 8.9<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Lipophilic emulsifier, low HLB value, good emulsification </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> NP-6<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Insoluble </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 10.9<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;' rowspan='2' colspan='1'> It has good emulsification, dispersibility and decontamination properties. Commonly used as leather degreasing agent, synthetic fiber oil component, metal cutting oil emulsifier </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> NP-7<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 20<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 12.0<br/> </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> NP-8<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 43<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 12.6<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;' rowspan='3' colspan='1'> Has good wettability and cleaning performance. It can be used as a raw material for penetrant in the textile industry, and can be used for sizing, desizing, scouring, bleaching, etc. </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> NP-8.6<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 50<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 12.8<br/> </td> </tr> <tr> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> NP-9 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 54 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 12.9 </td> </tr> <tr> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> NP-10 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 63 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 13.2 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> It can be used as a compound monomer of chemical fiber oil agent, used as a diffuser in the bleaching, smelting and dyeing process in the textile printing and dyeing industry, as a leveling agent, etc. </td> </tr> <tr> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> NP-15 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> White paste </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> &gt;100 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 15 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> Excellent detergency and wettability, suitable for high temperature </td> </tr> <tr> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> NP-40 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> White solid </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> &gt;100 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 17.8 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> High water-based emulsifier, suitable for high temperature </td> </tr> </tbody> </table>\"},{\"code\":\"100011\",\"title\":\"XP/XL/TO Series\",\"avatar\":\"/images/100011.png\",\"category\":[\"0\",\"10002\"],\"content\":\"<table> <tbody> <tr class='firstRow'> <td width='232' valign='top' style='-ms-word-break: break-all;'> Product </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> Brand </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> Catalog No. </td> <td width='350' valign='top' style='-ms-word-break: break-all;'> Features and application </td> </tr> <tr> <td width='232' valign='top' style='-ms-word-break: break-all;'> XP Series<br/> </td> <td width='232' valign='top' style='-ms-word-break: break-all;' rowspan='3' colspan='1'> BASF<br/> </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> XP-50\uff0cXP-70\uff0cXP-80\uff0cXP-90<br/> </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> Good permeability and high cost performance </td> </tr> <tr> <td width='232' valign='top' style='-ms-word-break: break-all;'> XL Series </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> XL-40, XL-50, XL-7-,LX-90<br/> </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> Low free alcohol, low odor<br/> </td> </tr> <tr> <td width='232' valign='top' style='-ms-word-break: break-all;'> TO Series </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> TO-5, TO-7, TO-8, TO-10 </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> Excellent emulsification performance, branched chain structure, good fluidity, high stability </td> </tr> <tr> <td width='232' valign='top' style='-ms-word-break: break-all;'> 10C Series </td> <td width='232' valign='top' style='-ms-word-break: break-all;' rowspan='2' colspan='1'> FUTURSIL<br/> </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> 1003, 1005, 1007, 1008, 1009 </td> <td width='232' valign='top' style='-ms-word-break: break-all;' rowspan='2' colspan='1'> Excellent detergency, moisturizing and emulsifying properties </td> </tr> <tr> <td width='232' valign='top' style='-ms-word-break: break-all;'> 13C Series </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> 1303, 1305, 1307, 1308, 1309, 1310 </td> </tr> </tbody> </table> <p></p>\"},{\"code\":\"100012\",\"title\":\"Others\",\"avatar\":\"/images/100012.png\",\"category\":[\"0\",\"10002\"],\"content\":\"<table> <tbody> <tr class='firstRow'> <td width='180' valign='top' style='-ms-word-break: break-all;'> Product </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Brand </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Catalog No. </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> Active ingredient </td> <td width='450' valign='top' style='-ms-word-break: break-all;'> Features and application </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> Tallow amine polyoxyethylene ether </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> FUTURSIL<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> 1815<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> \u226599% </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Amphoteric surfactants are non-ionic in acid media. It has excellent emulsification, dispersion, solubilization, antistatic and lubricating properties. </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> Alkyl diphenyl ether disulfonate </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> DOW<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> 2A1<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 45% </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Amphoteric surfactants are non-ionic in acid media. It has excellent emulsification, dispersion, solubilization, antistatic and lubricating properties. </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> Seconary Alkane Sulphonate Sodium </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Archroma<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> SAS-60<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 60% </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Anionic surfactant, has strong penetration under strong alkali and high temperature conditions, and has the functions of emulsification, deoiling and washing </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> Sodium dodecyl sulfonate </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> FUTURSIL<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> K12<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> \u226594% </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Emulsion polymerization anionic emulsifier, detergent ingredient </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> Fatty alcohol polyoxyethylene lauryl ether sulfate sodium </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> FUTURSIL </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> AES<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 70% </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Alkaline anionic surfactant, easily soluble in water, has excellent decontamination, emulsification and foaming properties. Used in textile industry wetting agent, detergent, daily chemical shampoo, etc. </td> </tr> </tbody> </table> <p></p>\"}]",
+      "[{\"code\":\"100001\",\"title\":\"Silicone oil(PDMS)\",\"avatar\":\"/images/100001.png\",\"category\":[\"0\",\"10001\"],\"content\":\"<table><tbody><tr class='firstRow'><td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'>Product</td><td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'>Brand</td><td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'>Viscosity (CST)</td><td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'>Features and application</td></tr><tr><td width='232' valign='top' style='-ms-word-break: break-all;' rowspan='3' colspan='1'>Dimethyl silicone fluid</td><td width='232' valign='top' style='-ms-word-break: break-all;'>FUTURSIL/DOW/WACKER</td><td width='232' valign='top' style='-ms-word-break: break-all;'>0.65CST, 2CST, 4CST, 10CST, 20CST</td><td width='232' valign='top' style='-ms-word-break: break-all;' rowspan='3' colspan='1'>The most typical type of silicone fluid oil product. PDMS is used in textile assistantsilicone based lubricants,defoaming agents, mold release agents, damping fluids, heat transfer fluids, polishes, cosmetics</td></tr><tr><td width='232' valign='top' style='-ms-word-break: break-all;'>FUTURSIL/DOW/WACKER/ BLUESTAR/SHINETSU</td><td width='232' valign='top' style='-ms-word-break: break-all;'>50CST, 100CST, 350CST, 500CST, 1000CST</td></tr><tr><td width='232' valign='top' style='-ms-word-break: break-all;'>FUTYRSIL/DOW/ WACKER</td><td width='232' valign='top' style='-ms-word-break: break-all;'>5000CST, 12500CST, 30000CST, 60000CST, 330000CST, 500000CST</td></tr></tbody></table><p><br/></p>\"},{\"code\":\"100002\",\"title\":\"OH polymer\",\"avatar\":\"/images/100002.png\",\"category\":[\"0\",\"10001\"],\"content\":\"<table> <tbody> <tr class='firstRow'> <td width='316' valign='top' style='-ms-word-break: break-all;'> Brand<br/> </td> <td width='316' valign='top' style='-ms-word-break: break-all;'> Viscosity (CST)<br/> </td> <td width='316' valign='top' style='-ms-word-break: break-all;'> Features and application </td> </tr> <tr> <td width='316' valign='top' style='-ms-word-break: break-all;' rowspan='4' colspan='1'> FUTURSIL/DOW/WACKER </td> <td width='316' valign='top' style='-ms-word-break: break-all;'> 6000CST<br/> </td> <td width='316' valign='top' style='-ms-word-break: break-all;' rowspan='4' colspan='1'> Used in pottiing for electric and electronic components for insulation, shock absorption and moisture proof purpose, caulking&amp;sealing for bulidings,mold release agent, adhesiveand paper coating </td> </tr> <tr> <td width='316' valign='top' style='-ms-word-break: break-all;'> 2000OCST<br/> </td> </tr> <tr> <td width='316' valign='top' style='-ms-word-break: break-all;'> 50000CST<br/> </td> </tr> <tr> <td width='316' valign='top' style='-ms-word-break: break-all;'> 70000CST<br/> </td> </tr> </tbody> </table> <p></p>\"},{\"code\":\"100003\",\"title\":\"Silicone emulsion\",\"avatar\":\"/images/100003.png\",\"category\":[\"0\",\"10001\"],\"content\":\"<table> <tbody> <tr class='firstRow'> <td width='181' valign='top' style='-ms-word-break: break-all;'> Product </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Brand </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Catalog No. </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Nonvolatile content </td> <td width='450' valign='top' style='-ms-word-break: break-all;'> Features and application </td> </tr> <tr> <td width='181' valign='top'> Silicone wax </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> DOW </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> MEM-1728 </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 97% </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> A silicone / organic wax dispersion used to lubricate polyester sewing threads. Provides uniform distribution over the entire thread surface resulting in thread with low friction characteristics. </td> </tr> <tr> <td width='181' valign='top' rowspan='3' colspan='1'> Silicone flui<span style='font-size: 14px;'></span>d emulsion </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> BLUESTAR </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> MEUL360 </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> \u226560% </td> <td width='181' valign='top' style='-ms-word-break: break-all;' rowspan='3' colspan='1'> A 60% actives non-ionic emulsion formulated with a polydimethlsiloxane. Applications include mold release of rubber or plastic parts (stoppers, screw tops, bungs, etc.), lubrication of extruded rubber parts conveyor belts, textile lubricant for yarn manufacture, sewing thread lubrication, hosiery manufacture, sewing needle. </td> </tr> <tr> <td width='181' valign='top' style='-ms-word-break: break-all;'> DOW </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> MEM-0349 </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> \u226560% </td> </tr> <tr> <td width='181' valign='top' style='-ms-word-break: break-all;'> WACKER </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> E3560 </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> \u226560% </td> </tr> </tbody> </table> <p> <br/> </p>\"},{\"code\":\"100004\",\"title\":\"Silicone Intermediates\",\"avatar\":\"/images/100004.png\",\"category\":[\"0\",\"10001\"],\"content\":\"<table width='-403'> <tbody> <tr class='firstRow'> <td width='181' valign='top' style='-ms-word-break: break-all;'> Product </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Brand </td> <td width='350' valign='top' style='-ms-word-break: break-all;'> Features and application </td> </tr> <tr> <td width='181' valign='top' style='-ms-word-break: break-all;'> Linear </td> <td width='181' valign='top' style='-ms-word-break: break-all;' rowspan='2' colspan='1'> DOW/WACKER/BLUESTAR </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Low viscosity, reactive silanol fluid </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> D4 </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> A base fluid in a number of personal care products, with excellent spreading and lubrication properties and unique volatility characteristics.Can be used in antiperspirants, deodorants, skin creams, lotions, bath oils, suntan and <br/>shaving products, make-up, nail polishes.In hair sprays; faster drying time in low VOC formula. </td> </tr> </tbody> </table> <p></p>\"},{\"code\":\"100005\",\"title\":\"Block silicone oil\",\"avatar\":\"/images/100005.png\",\"category\":[\"0\",\"10001\"],\"content\":\"<table> <tbody> <tr class='firstRow'> <td width='181' valign='top' style='-ms-word-break: break-all;'> Brand </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Catalog No. </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Nonvolatile content </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> PH </td> <td width='450' valign='top' style='-ms-word-break: break-all;'> Features and application </td> </tr> <tr> <td width='181' valign='top' style='-ms-word-break: break-all;'> FURTURSIL </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> T18<br/> </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 60%<br/> </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 5-6<br/> </td> <td width='181' valign='top' style='-ms-word-break: break-all;' rowspan='2' colspan='1'> Smooth &amp; firm touch feel. Good product stabilityMake the fabric soft, smooth and full of natural feel, especially suitable for chemical fiber fleece and nylon fabrics </td> </tr> <tr> <td width='181' valign='top' style='-ms-word-break: break-all;'> FURTURSIL </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> T26<br/> </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 60%<br/> </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 8<br/> </td> </tr> </tbody> </table> <p></p>\"},{\"code\":\"100006\",\"title\":\"Amino silicone oil\",\"avatar\":\"/images/100006.png\",\"category\":[\"0\",\"10001\"],\"content\":\"<table width='-168'> <tbody> <tr class='firstRow'> <td width='148' valign='top' style='-ms-word-break: break-all;'> Brand<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Catalog No. </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Nitrogen </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Viscosity (CST) </td> <td width='450' valign='top' style='-ms-word-break: break-all;'> Features and application<br/> </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> BLUESTAR </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> C845 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 0.4 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 4500 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Silicone oil with diamine functions, mainly<br/>intended for the formulation of textile finishing emulsions. </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> BLUESTAR </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> C910 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 0.8 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 1500 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Specially developed for formulation to emulsions for textile softening. </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> DOW </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> OFX-8040 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 0.4 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 1000 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Suitable for formulation to a micro emulsion, and, in this form, can be applied to all types of woven or knitted fabric imparting a soft handle </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> DOW </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> OFX-8468 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 0.6 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 5000-15000 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> A 100% actives amino functional siloxane polymer. It is used primarily in textile softening applications. </td> </tr> <tr> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> DOW </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> OFX-8417 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 0.9 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 1200 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> Premium amino softener suitable for formulation into microemulsion which can be applied by exhaustion and padding as textile softener. </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> WACKER </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> WR301 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 0.27 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 1000 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Particularly suitable as active substance in softener formulations for the impregnation of fibers and textiles. </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> WACKER </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> WR1100 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 0.15 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 5000 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Particularly suitable as active substance in softener formulations for the impregnation of fibers and textiles. </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> WACKER </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> WR1200 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 0.24 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 7000 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Particularly suitable as active substance in softener formulations for the impregnation of PES-fibers and PES-textiles. </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> WACKER </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> WR1300 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 0.3 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 1000 </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Particularly suitable as active substance in softener formulations for the impregnation of fibers and textiles. </td> </tr> </tbody> </table> <p> &nbsp; </p>\"},{\"code\":\"100007\",\"title\":\"Methyl hydrogen silicone oil\",\"avatar\":\"/images/100007.png\",\"category\":[\"0\",\"10001\"],\"content\":\"<table> <tbody> <tr class='firstRow'> <td width='181' valign='top' style='-ms-word-break: break-all;'> Brand </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Catalog No. </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> Viscosity (CST) </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> SiH </td> <td width='550' valign='top' style='-ms-word-break: break-all;'> Features and application </td> </tr> <tr> <td width='181' valign='top' style='-ms-word-break: break-all;'> DOW </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> MHX-1107<br/> </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 30CST<br/> </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 1.4-1.75%<br/> </td> <td width='181' valign='top' style='-ms-word-break: break-all;' rowspan='2' colspan='1'> Water repellency processing of textile, glass, metal, and ceramic materials.&nbsp; Enhancenment of fluidity in various inorganic powers. </td> </tr> <tr> <td width='181' valign='top' style='-ms-word-break: break-all;'> XINAN </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 7202 </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 20CST<br/> </td> <td width='181' valign='top' style='-ms-word-break: break-all;'> 1.4-1.75% </td> </tr> </tbody> </table> <p> &nbsp; </p>\"},{\"code\":\"100008\",\"title\":\"Silicone defoamer\",\"avatar\":\"/images/100008.png\",\"category\":[\"0\",\"10001\"],\"content\":\"<table> <tbody> <tr class='firstRow'> <td width='180' valign='top' style='-ms-word-break: break-all;'> Brand<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Catalog No.<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Nonvolatile content </td> <td width='450' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> Features </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Application </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> DOW<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> AFE-3168<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> 30%<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> Good defoaming and anti-foaming performance, good dilution stability, suitable for a wide range of PH </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='5' colspan='1'> Pre-treatment, dyeing and printing, compound addition of additives </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> DOW<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> AFE-0050<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> 50%<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> Good defoaming and anti-foaming performance </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> WACKER<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> SRE<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> 33%<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> Good defoaming and anti-foaming performance, universal type </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> FUTURSIL<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> T-68<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> 30%<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> Better performance than 3168, better stability and foam suppression performance </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> FUTURSIL<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> T-50<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> 50%<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> Better performance than 0050, better stability and foam suppression performance </td> </tr> </tbody> </table> <p></p>\"},{\"code\":\"100009\",\"title\":\"AEO(Fatty alcohol polyoxyethylene ether)\",\"avatar\":\"/images/100009.png\",\"category\":[\"0\",\"10002\"],\"content\":\"<table> <tbody> <tr class='firstRow'> <td width='148' valign='top' style='-ms-word-break: break-all;'> Product<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Appearance </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> PH </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Cloud point </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> HLB </td> <td width='450' valign='top' style='-ms-word-break: break-all;'> Features and application </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> AEO-3<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Transparency liquid<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 6-7<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Insoluble<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 8.3<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Lipophilic emulsifier, widely used in oil synthesis and as emulsifier<br/> </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> AEO-5<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Transparency liquid </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 6-7<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 28<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 10.2<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;' rowspan='2' colspan='1'> Used in liquid detergents, degreasers, emulsifiers, wetting agents and dispersants, with high foaming and excellent degreasing performance<br/> </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> AEO-6<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Transparency liquid </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 6-7<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 33<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 11<br/> </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> AEO-7<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Transparency liquid </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 6-8<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 57<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 12.4<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;' rowspan='2' colspan='1'> With good emulsification, decontamination, water solubility and biodegradability, it is widely used in detergents and emulsifiers </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> AEO-9<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Paste </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 6-8<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 79<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 13.5<br/> </td> </tr> </tbody> </table> <p></p>\"},{\"code\":\"100010\",\"title\":\"NPE(nonylphenol polyoxyethylene ether)\",\"avatar\":\"/images/100010.png\",\"category\":[\"0\",\"10002\"],\"content\":\"<table> <tbody> <tr class='firstRow'> <td width='148' valign='top' style='-ms-word-break: break-all;'> Product </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Appearance </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> PH </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Cloud point </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> HLB </td> <td width='450' valign='top' style='-ms-word-break: break-all;'> Features and application </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> NP-4<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;' rowspan='7' colspan='1'> Colorless to light yellow liquid<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;' rowspan='9' colspan='1'> 6-7<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Insoluble </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 8.9<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Lipophilic emulsifier, low HLB value, good emulsification </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> NP-6<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> Insoluble </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 10.9<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;' rowspan='2' colspan='1'> It has good emulsification, dispersibility and decontamination properties. Commonly used as leather degreasing agent, synthetic fiber oil component, metal cutting oil emulsifier </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> NP-7<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 20<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 12.0<br/> </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> NP-8<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 43<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 12.6<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;' rowspan='3' colspan='1'> Has good wettability and cleaning performance. It can be used as a raw material for penetrant in the textile industry, and can be used for sizing, desizing, scouring, bleaching, etc. </td> </tr> <tr> <td width='148' valign='top' style='-ms-word-break: break-all;'> NP-8.6<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 50<br/> </td> <td width='148' valign='top' style='-ms-word-break: break-all;'> 12.8<br/> </td> </tr> <tr> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> NP-9 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 54 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 12.9 </td> </tr> <tr> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> NP-10 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 63 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 13.2 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> It can be used as a compound monomer of chemical fiber oil agent, used as a diffuser in the bleaching, smelting and dyeing process in the textile printing and dyeing industry, as a leveling agent, etc. </td> </tr> <tr> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> NP-15 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> White paste </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> &gt;100 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 15 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> Excellent detergency and wettability, suitable for high temperature </td> </tr> <tr> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> NP-40 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> White solid </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> &gt;100 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 17.8 </td> <td valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> High water-based emulsifier, suitable for high temperature </td> </tr> </tbody> </table>\"},{\"code\":\"100011\",\"title\":\"XP/XL/TO Series\",\"avatar\":\"/images/100011.png\",\"category\":[\"0\",\"10002\"],\"content\":\"<table> <tbody> <tr class='firstRow'> <td width='232' valign='top' style='-ms-word-break: break-all;'> Product </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> Brand </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> Catalog No. </td> <td width='350' valign='top' style='-ms-word-break: break-all;'> Features and application </td> </tr> <tr> <td width='232' valign='top' style='-ms-word-break: break-all;'> XP Series<br/> </td> <td width='232' valign='top' style='-ms-word-break: break-all;' rowspan='3' colspan='1'> BASF<br/> </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> XP-50\uff0cXP-70\uff0cXP-80\uff0cXP-90<br/> </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> Good permeability and high cost performance </td> </tr> <tr> <td width='232' valign='top' style='-ms-word-break: break-all;'> XL Series </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> XL-40, XL-50, XL-7-,LX-90<br/> </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> Low free alcohol, low odor<br/> </td> </tr> <tr> <td width='232' valign='top' style='-ms-word-break: break-all;'> TO Series </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> TO-5, TO-7, TO-8, TO-10 </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> Excellent emulsification performance, branched chain structure, good fluidity, high stability </td> </tr> <tr> <td width='232' valign='top' style='-ms-word-break: break-all;'> 10C Series </td> <td width='232' valign='top' style='-ms-word-break: break-all;' rowspan='2' colspan='1'> FUTURSIL<br/> </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> 1003, 1005, 1007, 1008, 1009 </td> <td width='232' valign='top' style='-ms-word-break: break-all;' rowspan='2' colspan='1'> Excellent detergency, moisturizing and emulsifying properties </td> </tr> <tr> <td width='232' valign='top' style='-ms-word-break: break-all;'> 13C Series </td> <td width='232' valign='top' style='-ms-word-break: break-all;'> 1303, 1305, 1307, 1308, 1309, 1310 </td> </tr> </tbody> </table> <p></p>\"},{\"code\":\"100012\",\"title\":\"Others\",\"avatar\":\"/images/100012.png\",\"category\":[\"0\",\"10002\"],\"content\":\"<table> <tbody> <tr class='firstRow'> <td width='180' valign='top' style='-ms-word-break: break-all;'> Product </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Brand </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Catalog No. </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> Active ingredient </td> <td width='450' valign='top' style='-ms-word-break: break-all;'> Features and application </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> Tallow amine polyoxyethylene ether </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> FUTURSIL<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> 1815<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> \u226599% </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Amphoteric surfactants are non-ionic in acid media. It has excellent emulsification, dispersion, solubilization, antistatic and lubricating properties. </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> Alkyl diphenyl ether disulfonate </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> DOW<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> 2A1<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 45% </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Amphoteric surfactants are non-ionic in acid media. It has excellent emulsification, dispersion, solubilization, antistatic and lubricating properties. </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> Seconary Alkane Sulphonate Sodium </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Archroma<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> SAS-60<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 60% </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Anionic surfactant, has strong penetration under strong alkali and high temperature conditions, and has the functions of emulsification, deoiling and washing </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> Sodium dodecyl sulfonate </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> FUTURSIL<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> K12<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> \u226594% </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Emulsion polymerization anionic emulsifier, detergent ingredient </td> </tr> <tr> <td width='180' valign='top' style='-ms-word-break: break-all;'> Fatty alcohol polyoxyethylene lauryl ether sulfate sodium </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> FUTURSIL </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> AES<br/> </td> <td width='180' valign='top' style='-ms-word-break: break-all;' rowspan='1' colspan='1'> 70% </td> <td width='180' valign='top' style='-ms-word-break: break-all;'> Alkaline anionic surfactant, easily soluble in water, has excellent decontamination, emulsification and foaming properties. Used in textile industry wetting agent, detergent, daily chemical shampoo, etc. </td> </tr> </tbody> </table> <p></p>\"}]",
     );
   },
   '8GlL': function (e, t, n) {
@@ -4947,8 +4974,8 @@
       P = 'leave',
       A = 'none',
       _ = 'prepare',
-      N = 'start',
-      R = 'active',
+      R = 'start',
+      N = 'active',
       I = 'end';
     function M(e) {
       var t = Object(l['useRef'])(!1),
@@ -5000,11 +5027,11 @@
           [n, t]
         );
       },
-      B = [_, N, R, I],
+      B = [_, R, N, I],
       z = !1,
       V = !0;
     function H(e) {
-      return e === R || e === I;
+      return e === N || e === I;
     }
     var W = function (e, t) {
         var n = l['useState'](A),
@@ -5139,24 +5166,24 @@
                 return (
                   (e = {}),
                   Object(r['a'])(e, _, y),
-                  Object(r['a'])(e, N, g),
-                  Object(r['a'])(e, R, k),
+                  Object(r['a'])(e, R, g),
+                  Object(r['a'])(e, N, k),
                   e
                 );
               case 'enter':
                 return (
                   (t = {}),
                   Object(r['a'])(t, _, m),
-                  Object(r['a'])(t, N, w),
-                  Object(r['a'])(t, R, x),
+                  Object(r['a'])(t, R, w),
+                  Object(r['a'])(t, N, x),
                   t
                 );
               case 'leave':
                 return (
                   (n = {}),
                   Object(r['a'])(n, _, b),
-                  Object(r['a'])(n, N, O),
-                  Object(r['a'])(n, R, j),
+                  Object(r['a'])(n, R, O),
+                  Object(r['a'])(n, N, j),
                   n
                 );
               default:
@@ -5178,7 +5205,7 @@
                 : n.call(fe, ie(), null)) || null,
             );
           return (
-            ve === R &&
+            ve === N &&
               (se(ie()),
               h > 0 &&
                 (clearTimeout(ne.current),
@@ -5225,7 +5252,7 @@
         );
       var me = Z;
       return (
-        fe[_] && ve === N && (me = Object(o['a'])({ transition: 'none' }, me)),
+        fe[_] && ve === R && (me = Object(o['a'])({ transition: 'none' }, me)),
         [$, ve, me, null !== B && void 0 !== B ? B : t]
       );
     }
@@ -5284,8 +5311,8 @@
           T = j[1],
           P = j[2],
           A = j[3],
-          R = l['useRef'](A);
-        A && (R.current = !0);
+          N = l['useRef'](A);
+        A && (N.current = !0);
         var I = Object(l['useRef'])(t);
         I.current = t;
         var M,
@@ -5300,7 +5327,7 @@
               ? (U = 'prepare')
               : H(T)
               ? (U = 'active')
-              : T === N && (U = 'start'),
+              : T === R && (U = 'start'),
               (M = v(
                 Object(o['a'])(
                   Object(o['a'])({}, F),
@@ -5321,7 +5348,7 @@
           } else
             M = A
               ? v(Object(o['a'])({}, F), L)
-              : !p && R.current
+              : !p && N.current
               ? v(
                   Object(o['a'])(Object(o['a'])({}, F), {}, { className: m }),
                   L,
@@ -7738,7 +7765,7 @@
     P.displayName = 'Item';
     var A = P,
       _ = n('wgJM');
-    function N() {
+    function R() {
       var e = Object(c['useState'])({}),
         t = Object(d['a'])(e, 2),
         n = t[1],
@@ -7768,7 +7795,7 @@
         l
       );
     }
-    var R = function (e, t) {
+    var N = function (e, t) {
         var n = c['useContext'](L);
         if (!n) {
           var o = e.component,
@@ -7789,7 +7816,7 @@
           ),
         );
       },
-      I = c['forwardRef'](R);
+      I = c['forwardRef'](N);
     I.displayName = 'RawItem';
     var M = I,
       L = c['createContext'](null),
@@ -7837,8 +7864,8 @@
           'itemComponent',
           'onVisibleChange',
         ]),
-        _ = N(),
-        R = 'full' === m,
+        _ = R(),
+        N = 'full' === m,
         I = _(null),
         M = Object(d['a'])(I, 2),
         B = M[0],
@@ -7870,7 +7897,7 @@
         de = se[1],
         pe = c['useMemo'](
           function () {
-            return null === fe && R ? Number.MAX_SAFE_INTEGER : fe || 0;
+            return null === fe && N ? Number.MAX_SAFE_INTEGER : fe || 0;
           },
           [fe, B],
         ),
@@ -7889,7 +7916,7 @@
             return (
               we
                 ? (e =
-                    null === B && R ? a : a.slice(0, Math.min(a.length, V / y)))
+                    null === B && N ? a : a.slice(0, Math.min(a.length, V / y)))
                 : 'number' === typeof w && (e = a.slice(0, w)),
               e
             );
@@ -7940,7 +7967,7 @@
       function _e(e, t) {
         oe(t);
       }
-      function Ne(e) {
+      function Re(e) {
         return q.get(Ee(xe[e], e));
       }
       c['useLayoutEffect'](
@@ -7951,14 +7978,14 @@
               n = t - 1;
             if (!t) return Ce(0), void ce(null);
             for (var r = 0; r < t; r += 1) {
-              var o = Ne(r);
+              var o = Re(r);
               if (void 0 === o) {
                 Ce(r - 1, !0);
                 break;
               }
               if (
                 ((e += o),
-                (0 === n && e <= V) || (r === n - 1 && e + Ne(n) <= V))
+                (0 === n && e <= V) || (r === n - 1 && e + Re(n) <= V))
               ) {
                 Ce(n), ce(null);
                 break;
@@ -7968,12 +7995,12 @@
                 break;
               }
             }
-            x && Ne(0) + re > V && ce(null);
+            x && Re(0) + re > V && ce(null);
           }
         },
         [V, q, Z, re, Ee, xe],
       );
-      var Re = ye && !!je.length,
+      var Ne = ye && !!je.length,
         Ie = {};
       null !== le && we && (Ie = { position: 'absolute', left: le, top: 0 });
       var Me,
@@ -8016,10 +8043,10 @@
               );
             },
         De = {
-          order: Re ? pe : Number.MAX_SAFE_INTEGER,
+          order: Ne ? pe : Number.MAX_SAFE_INTEGER,
           className: ''.concat(be, '-rest'),
           registerSize: Ae,
-          display: Re,
+          display: Ne,
         };
       if (k)
         k &&
@@ -8425,15 +8452,15 @@
           P = x.selectedKeys,
           A = x.onActive,
           _ = ''.concat(j, '-item'),
-          N = c['useRef'](),
           R = c['useRef'](),
+          N = c['useRef'](),
           I = S || a,
           M = ie(i);
         var L = function (e) {
             return {
               key: i,
               keyPath: Object(f['a'])(M).reverse(),
-              item: N.current,
+              item: R.current,
               domEvent: e,
             };
           },
@@ -8465,8 +8492,8 @@
             se,
             Object(r['a'])(
               {
-                ref: N,
-                elementRef: R,
+                ref: R,
+                elementRef: N,
                 role: null === h ? 'none' : h || 'menuitem',
                 tabIndex: a ? null : -1,
                 'data-menu-id': C && k ? null : k,
@@ -8642,9 +8669,9 @@
           ? Object(s['a'])(Object(s['a'])({}, ke), w)
           : Object(s['a'])(Object(s['a'])({}, Oe), w),
         A = je[f],
-        N = xe(f, x, j),
-        R = Object(s['a'])(
-          Object(s['a'])({}, N),
+        R = xe(f, x, j),
+        N = Object(s['a'])(
+          Object(s['a'])({}, R),
           {},
           {
             leavedClassName: ''.concat(t, '-hidden'),
@@ -8688,7 +8715,7 @@
             mouseLeaveDelay: g,
             onPopupVisibleChange: p,
             forceRender: k,
-            popupMotion: R,
+            popupMotion: N,
           },
           r,
         )
@@ -8798,8 +8825,8 @@
         P = T.prefixCls,
         A = T.mode,
         _ = T.openKeys,
-        N = T.disabled,
-        R = T.overflowDisabled,
+        R = T.disabled,
+        N = T.overflowDisabled,
         I = T.activeKey,
         M = T.selectedKeys,
         L = T.itemIcon,
@@ -8811,13 +8838,13 @@
         V = z.isSubPathKey,
         W = ie(),
         q = ''.concat(P, '-submenu'),
-        K = N || l,
+        K = R || l,
         G = c['useRef'](),
         $ = c['useRef']();
       var te = y || L,
         ne = m || F,
         re = _.includes(a),
-        oe = !R && re,
+        oe = !N && re,
         le = V(M, a),
         ce = X(a, K, j, E),
         se = ce.active,
@@ -8867,7 +8894,7 @@
               tabIndex: K ? null : -1,
               ref: G,
               title: 'string' === typeof i ? i : null,
-              'data-menu-id': R && C ? null : C,
+              'data-menu-id': N && C ? null : C,
               'aria-expanded': oe,
               'aria-haspopup': !0,
               'aria-controls': Pe,
@@ -8893,20 +8920,20 @@
         ),
         _e = c['useRef'](A);
       if (
-        ('inline' !== A && (_e.current = W.length > 1 ? 'vertical' : A), !R)
+        ('inline' !== A && (_e.current = W.length > 1 ? 'vertical' : A), !N)
       ) {
-        var Ne = _e.current;
+        var Re = _e.current;
         Ae = c['createElement'](
           Ee,
           {
-            mode: Ne,
+            mode: Re,
             prefixCls: q,
             visible: !f && oe && 'inline' !== A,
             popupClassName: b,
             popupOffset: g,
             popup: c['createElement'](
               Q,
-              { mode: 'horizontal' === Ne ? 'vertical' : Ne },
+              { mode: 'horizontal' === Re ? 'vertical' : Re },
               c['createElement'](be, { id: Pe, ref: $ }, h),
             ),
             disabled: K,
@@ -8943,7 +8970,7 @@
             onMouseLeave: we,
           }),
           Ae,
-          !R && c['createElement'](Ce, { id: Pe, open: oe, keyPath: W }, h),
+          !N && c['createElement'](Ce, { id: Pe, open: oe, keyPath: W }, h),
         ),
       );
     };
@@ -8991,20 +9018,20 @@
       }
       return !1;
     }
-    function Ne(e) {
+    function Re(e) {
       var t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
         n = Object(f['a'])(e.querySelectorAll('*')).filter(function (e) {
           return _e(e, t);
         });
       return _e(e, t) && n.unshift(e), n;
     }
-    var Re = q.LEFT,
+    var Ne = q.LEFT,
       Ie = q.RIGHT,
       Me = q.UP,
       Le = q.DOWN,
       Fe = q.ENTER,
       De = q.ESC,
-      Ue = [Me, Le, Re, Ie];
+      Ue = [Me, Le, Ne, Ie];
     function Be(e, t, n, r) {
       var o,
         i,
@@ -9018,7 +9045,7 @@
       var p = ((o = {}), Object(u['a'])(o, Me, c), Object(u['a'])(o, Le, s), o),
         h =
           ((i = {}),
-          Object(u['a'])(i, Re, n ? s : c),
+          Object(u['a'])(i, Ne, n ? s : c),
           Object(u['a'])(i, Ie, n ? c : s),
           Object(u['a'])(i, Le, f),
           Object(u['a'])(i, Fe, f),
@@ -9029,7 +9056,7 @@
           Object(u['a'])(a, Le, s),
           Object(u['a'])(a, Fe, f),
           Object(u['a'])(a, De, d),
-          Object(u['a'])(a, Re, n ? f : d),
+          Object(u['a'])(a, Ne, n ? f : d),
           Object(u['a'])(a, Ie, n ? d : f),
           a),
         y = {
@@ -9074,7 +9101,7 @@
       return null;
     }
     function He(e, t) {
-      var n = Ne(e, !0);
+      var n = Re(e, !0);
       return n.filter(function (e) {
         return t.has(e);
       });
@@ -9303,8 +9330,8 @@
           P = e.subMenuCloseDelay,
           A = void 0 === P ? 0.1 : P,
           _ = e.forceSubMenuRender,
-          N = e.defaultOpenKeys,
-          R = e.openKeys,
+          R = e.defaultOpenKeys,
+          N = e.openKeys,
           I = e.activeKey,
           M = e.defaultActiveFirst,
           L = e.selectable,
@@ -9397,10 +9424,10 @@
           Te = c['useState'](0),
           Ae = Object(d['a'])(Te, 2),
           _e = Ae[0],
-          Ne = Ae[1],
-          Re = _e >= ye.length - 1 || 'horizontal' !== Se || S,
-          Ie = b(N, {
-            value: R,
+          Re = Ae[1],
+          Ne = _e >= ye.length - 1 || 'horizontal' !== Se || S,
+          Ie = b(R, {
+            value: N,
             postState: function (e) {
               return e || tt;
             },
@@ -9452,14 +9479,14 @@
         c['useEffect'](
           function () {
             Qe(
-              Re
+              Ne
                 ? tt
                 : ye.slice(_e + 1).map(function (e) {
                     return e.key;
                   }),
             );
           },
-          [_e, Re],
+          [_e, Ne],
         );
         var at = b(
             I || (M && (null === (t = ye[0]) || void 0 === t ? void 0 : t.key)),
@@ -9581,7 +9608,7 @@
                     {
                       eventKey: Ze,
                       title: oe,
-                      disabled: Re,
+                      disabled: Ne,
                       internalPopupClose: 0 === t,
                       popupClassName: ie,
                     },
@@ -9593,7 +9620,7 @@
                 ssr: 'full',
                 'data-menu-list': !0,
                 onVisibleChange: function (e) {
-                  Ne(e);
+                  Re(e);
                 },
                 onKeyDown: Ot,
               },
@@ -9899,12 +9926,12 @@
             'getTooltipContainer',
             'overlayInnerStyle',
           ]),
-          N = Object(c['useRef'])(null);
+          R = Object(c['useRef'])(null);
         Object(c['useImperativeHandle'])(t, function () {
-          return N.current;
+          return R.current;
         });
-        var R = Object(s['a'])({}, _);
-        'visible' in e && (R.popupVisible = e.visible);
+        var N = Object(s['a'])({}, _);
+        'visible' in e && (N.popupVisible = e.visible);
         var I = function () {
             var t = e.arrowContent,
               n = void 0 === t ? null : t,
@@ -9942,7 +9969,7 @@
               action: i,
               builtinPlacements: gt,
               popupPlacement: x,
-              ref: N,
+              ref: R,
               popupAlign: E,
               getPopupContainer: P,
               onPopupVisibleChange: m,
@@ -9957,7 +9984,7 @@
               popupStyle: d,
               mouseEnterDelay: l,
             },
-            R,
+            N,
           ),
           y,
         );
@@ -10011,7 +10038,7 @@
     }
     var At = n('H84U'),
       _t = n('CWQg'),
-      Nt =
+      Rt =
         (Object(_t['a'])(
           'success',
           'processing',
@@ -10034,7 +10061,7 @@
           'gold',
           'lime',
         )),
-      Rt = function () {
+      Nt = function () {
         return { height: 0, opacity: 0 };
       },
       It = function (e) {
@@ -10051,12 +10078,12 @@
       },
       Ft = {
         motionName: 'ant-motion-collapse',
-        onAppearStart: Rt,
-        onEnterStart: Rt,
+        onAppearStart: Nt,
+        onEnterStart: Nt,
         onAppearActive: It,
         onEnterActive: It,
         onLeaveStart: Mt,
-        onLeaveActive: Rt,
+        onLeaveActive: Nt,
         onAppearEnd: Lt,
         onEnterEnd: Lt,
         onLeaveEnd: Lt,
@@ -10091,7 +10118,7 @@
           { picked: n, omitted: o }
         );
       },
-      Vt = new RegExp('^('.concat(Nt.join('|'), ')(-inverse)?$'));
+      Vt = new RegExp('^('.concat(Rt.join('|'), ')(-inverse)?$'));
     function Ht(e, t) {
       var n = e.type;
       if (
@@ -10198,9 +10225,9 @@
         P = e.overlayInnerStyle,
         A = e.children,
         _ = a('tooltip', j),
-        N = a(),
-        R = p;
-      !('visible' in e) && y() && (R = !1);
+        R = a(),
+        N = p;
+      !('visible' in e) && y() && (N = !1);
       var I,
         M = Ht(Object(pt['b'])(A) ? A : c['createElement']('span', null, A), _),
         L = M.props,
@@ -10230,7 +10257,7 @@
             ref: t,
             builtinPlacements: g(),
             overlay: O(),
-            visible: R,
+            visible: N,
             onVisibleChange: m,
             onPopupAlign: w,
             overlayInnerStyle: U,
@@ -10239,11 +10266,11 @@
               style: I,
             }),
             motion: {
-              motionName: Dt(N, 'zoom-big-fast', e.transitionName),
+              motionName: Dt(R, 'zoom-big-fast', e.transitionName),
               motionDeadline: 1e3,
             },
           }),
-          R ? Object(pt['a'])(M, { className: F }) : M,
+          N ? Object(pt['a'])(M, { className: F }) : M,
         )
       );
     });
@@ -10512,10 +10539,10 @@
           ]),
           A = Object(c['useContext'])(rn),
           _ = A.siderHook,
-          N = Object(c['useState'])('collapsed' in P ? P.collapsed : s),
-          R = Object(d['a'])(N, 2),
-          I = R[0],
-          M = R[1],
+          R = Object(c['useState'])('collapsed' in P ? P.collapsed : s),
+          N = Object(d['a'])(R, 2),
+          I = N[0],
+          M = N[1],
           L = Object(c['useState'])(!1),
           F = Object(d['a'])(L, 2),
           D = F[0],
@@ -11057,16 +11084,13 @@
           Object(i['jsx'])('div', {
             className: o.a.email,
             children: a.map((e) =>
-              Object(i['jsxs'])(
+              Object(i['jsx'])(
                 'div',
                 {
-                  children: [
-                    Object(i['jsx'])('div', { children: e.name }),
-                    Object(i['jsx'])('a', {
-                      href: 'mailto:'.concat(e.email),
-                      children: e.email,
-                    }),
-                  ],
+                  children: Object(i['jsx'])('a', {
+                    href: 'mailto:'.concat(e.email),
+                    children: e.email,
+                  }),
                 },
                 e.name,
               ),
@@ -12720,7 +12744,7 @@
   },
   IpS4: function (e) {
     e.exports = JSON.parse(
-      '[{"code":"0","title":"PRODUCTS","children":[{"code":"10001","title":"SILICONE","image":"/images/icon/COVID-19.PNG","color":"#1faead"},{"code":"10002","title":"SURFACTANT","image":"/images/icon/IVD  PRODUCT.PNG","color":"#1faead"}]}]',
+      '[{"code":"0","title":"PRODUCTS","children":[{"code":"10001","title":"SILICONE","image":"/images/icon/COVID-19.PNG","color":"#1faead","children":[]},{"code":"10002","title":"SURFACTANT","image":"/images/icon/IVD  PRODUCT.PNG","color":"#1faead","children":[]}]}]',
     );
   },
   IyRk: function (e, t) {
@@ -13006,12 +13030,12 @@
     function _(e) {
       return String(e).replace(/"/g, '&quot;');
     }
-    function N(e) {
+    function R(e) {
       return (
         '[object Array]' === H(e) && (!P || !('object' === typeof e && P in e))
       );
     }
-    function R(e) {
+    function N(e) {
       return (
         '[object Date]' === H(e) && (!P || !('object' === typeof e && P in e))
       );
@@ -13101,7 +13125,7 @@
         ('undefined' === typeof r && (r = 0),
         r >= f && f > 0 && 'object' === typeof t)
       )
-        return N(t) ? '[Array]' : '[Object]';
+        return R(t) ? '[Array]' : '[Object]';
       var d = oe(l, r);
       if ('undefined' === typeof o) o = [];
       else if (q(o, t) >= 0) return '[Circular]';
@@ -13147,7 +13171,7 @@
           b
         );
       }
-      if (N(t)) {
+      if (R(t)) {
         if (0 === t.length) return '[]';
         var k = ae(t, p);
         return d && !re(k) ? '[' + ie(k, d) + ']' : '[ ' + k.join(', ') + ' ]';
@@ -13188,7 +13212,7 @@
       if (B(t)) return ee(p(O.call(t)));
       if (D(t)) return ee(m.call(t));
       if (L(t)) return ee(p(String(t)));
-      if (!R(t) && !I(t)) {
+      if (!N(t) && !I(t)) {
         var Z = ae(t, p),
           le = S
             ? S(t) === Object.prototype
@@ -13352,7 +13376,7 @@
       return n + e.join(',' + n) + '\n' + t.prev;
     }
     function ae(e, t) {
-      var n = N(e),
+      var n = R(e),
         r = [];
       if (n) {
         r.length = e.length;
@@ -13824,7 +13848,7 @@
               r.push(p(o.messages.pattern.mismatch, e.fullField, t, e.pattern));
           }
       }
-      var N = {
+      var R = {
         required: x,
         whitespace: j,
         type: C,
@@ -13832,17 +13856,17 @@
         enum: A,
         pattern: _,
       };
-      function R(e, t, n, r, o) {
+      function N(e, t, n, r, o) {
         var i = [],
           a = e.required || (!e.required && r.hasOwnProperty(e.field));
         if (a) {
           if (v(t, 'string') && !e.required) return n();
-          N.required(e, t, r, i, o, 'string'),
+          R.required(e, t, r, i, o, 'string'),
             v(t, 'string') ||
-              (N.type(e, t, r, i, o),
-              N.range(e, t, r, i, o),
-              N.pattern(e, t, r, i, o),
-              !0 === e.whitespace && N.whitespace(e, t, r, i, o));
+              (R.type(e, t, r, i, o),
+              R.range(e, t, r, i, o),
+              R.pattern(e, t, r, i, o),
+              !0 === e.whitespace && R.whitespace(e, t, r, i, o));
         }
         n(i);
       }
@@ -13851,7 +13875,7 @@
           a = e.required || (!e.required && r.hasOwnProperty(e.field));
         if (a) {
           if (v(t) && !e.required) return n();
-          N.required(e, t, r, i, o), void 0 !== t && N.type(e, t, r, i, o);
+          R.required(e, t, r, i, o), void 0 !== t && R.type(e, t, r, i, o);
         }
         n(i);
       }
@@ -13860,8 +13884,8 @@
           a = e.required || (!e.required && r.hasOwnProperty(e.field));
         if (a) {
           if (('' === t && (t = void 0), v(t) && !e.required)) return n();
-          N.required(e, t, r, i, o),
-            void 0 !== t && (N.type(e, t, r, i, o), N.range(e, t, r, i, o));
+          R.required(e, t, r, i, o),
+            void 0 !== t && (R.type(e, t, r, i, o), R.range(e, t, r, i, o));
         }
         n(i);
       }
@@ -13870,7 +13894,7 @@
           a = e.required || (!e.required && r.hasOwnProperty(e.field));
         if (a) {
           if (v(t) && !e.required) return n();
-          N.required(e, t, r, i, o), void 0 !== t && N.type(e, t, r, i, o);
+          R.required(e, t, r, i, o), void 0 !== t && R.type(e, t, r, i, o);
         }
         n(i);
       }
@@ -13879,7 +13903,7 @@
           a = e.required || (!e.required && r.hasOwnProperty(e.field));
         if (a) {
           if (v(t) && !e.required) return n();
-          N.required(e, t, r, i, o), v(t) || N.type(e, t, r, i, o);
+          R.required(e, t, r, i, o), v(t) || R.type(e, t, r, i, o);
         }
         n(i);
       }
@@ -13888,8 +13912,8 @@
           a = e.required || (!e.required && r.hasOwnProperty(e.field));
         if (a) {
           if (v(t) && !e.required) return n();
-          N.required(e, t, r, i, o),
-            void 0 !== t && (N.type(e, t, r, i, o), N.range(e, t, r, i, o));
+          R.required(e, t, r, i, o),
+            void 0 !== t && (R.type(e, t, r, i, o), R.range(e, t, r, i, o));
         }
         n(i);
       }
@@ -13898,8 +13922,8 @@
           a = e.required || (!e.required && r.hasOwnProperty(e.field));
         if (a) {
           if (v(t) && !e.required) return n();
-          N.required(e, t, r, i, o),
-            void 0 !== t && (N.type(e, t, r, i, o), N.range(e, t, r, i, o));
+          R.required(e, t, r, i, o),
+            void 0 !== t && (R.type(e, t, r, i, o), R.range(e, t, r, i, o));
         }
         n(i);
       }
@@ -13908,10 +13932,10 @@
           a = e.required || (!e.required && r.hasOwnProperty(e.field));
         if (a) {
           if ((void 0 === t || null === t) && !e.required) return n();
-          N.required(e, t, r, i, o, 'array'),
+          R.required(e, t, r, i, o, 'array'),
             void 0 !== t &&
               null !== t &&
-              (N.type(e, t, r, i, o), N.range(e, t, r, i, o));
+              (R.type(e, t, r, i, o), R.range(e, t, r, i, o));
         }
         n(i);
       }
@@ -13920,7 +13944,7 @@
           a = e.required || (!e.required && r.hasOwnProperty(e.field));
         if (a) {
           if (v(t) && !e.required) return n();
-          N.required(e, t, r, i, o), void 0 !== t && N.type(e, t, r, i, o);
+          R.required(e, t, r, i, o), void 0 !== t && R.type(e, t, r, i, o);
         }
         n(i);
       }
@@ -13930,7 +13954,7 @@
           a = e.required || (!e.required && r.hasOwnProperty(e.field));
         if (a) {
           if (v(t) && !e.required) return n();
-          N.required(e, t, r, i, o), void 0 !== t && N[V](e, t, r, i, o);
+          R.required(e, t, r, i, o), void 0 !== t && R[V](e, t, r, i, o);
         }
         n(i);
       }
@@ -13939,7 +13963,7 @@
           a = e.required || (!e.required && r.hasOwnProperty(e.field));
         if (a) {
           if (v(t, 'string') && !e.required) return n();
-          N.required(e, t, r, i, o), v(t, 'string') || N.pattern(e, t, r, i, o);
+          R.required(e, t, r, i, o), v(t, 'string') || R.pattern(e, t, r, i, o);
         }
         n(i);
       }
@@ -13949,17 +13973,17 @@
         if (a) {
           if (v(t, 'date') && !e.required) return n();
           var l;
-          if ((N.required(e, t, r, i, o), !v(t, 'date')))
+          if ((R.required(e, t, r, i, o), !v(t, 'date')))
             (l = t instanceof Date ? t : new Date(t)),
-              N.type(e, l, r, i, o),
-              l && N.range(e, l.getTime(), r, i, o);
+              R.type(e, l, r, i, o),
+              l && R.range(e, l.getTime(), r, i, o);
         }
         n(i);
       }
       function K(e, t, n, r, o) {
         var i = [],
           a = Array.isArray(t) ? 'array' : typeof t;
-        N.required(e, t, r, i, o, a), n(i);
+        R.required(e, t, r, i, o, a), n(i);
       }
       function G(e, t, n, r, o) {
         var i = e.type,
@@ -13967,7 +13991,7 @@
           l = e.required || (!e.required && r.hasOwnProperty(e.field));
         if (l) {
           if (v(t, i) && !e.required) return n();
-          N.required(e, t, r, a, o, i), v(t, i) || N.type(e, t, r, a, o);
+          R.required(e, t, r, a, o, i), v(t, i) || R.type(e, t, r, a, o);
         }
         n(a);
       }
@@ -13976,12 +14000,12 @@
           a = e.required || (!e.required && r.hasOwnProperty(e.field));
         if (a) {
           if (v(t) && !e.required) return n();
-          N.required(e, t, r, i, o);
+          R.required(e, t, r, i, o);
         }
         n(i);
       }
       var $ = {
-        string: R,
+        string: N,
         method: I,
         number: M,
         boolean: L,
@@ -14298,8 +14322,8 @@
       P = 'Invalid port',
       A = /[A-Za-z]/,
       _ = /[\d+-.A-Za-z]/,
-      N = /\d/,
-      R = /^(0x|0X)/,
+      R = /\d/,
+      N = /^(0x|0X)/,
       I = /^[0-7]+$/,
       M = /^\d+$/,
       L = /^[\dA-Fa-f]+$/,
@@ -14342,7 +14366,7 @@
             ((i = 10),
             o.length > 1 &&
               '0' == o.charAt(0) &&
-              ((i = R.test(o) ? 16 : 8), (o = o.slice(8 == i ? 1 : 2))),
+              ((i = N.test(o) ? 16 : 8), (o = o.slice(8 == i ? 1 : 2))),
             '' === o)
           )
             a = 0;
@@ -14393,8 +14417,8 @@
                   if (!('.' == d() && r < 4)) return;
                   f++;
                 }
-                if (!N.test(d())) return;
-                while (N.test(d())) {
+                if (!R.test(d())) return;
+                while (R.test(d())) {
                   if (((i = parseInt(d(), 10)), null === o)) o = i;
                   else {
                     if (0 == o) return;
@@ -14738,7 +14762,7 @@
               }
               break;
             case be:
-              if (!N.test(a)) {
+              if (!R.test(a)) {
                 if (
                   a == r ||
                   '/' == a ||
@@ -14897,8 +14921,8 @@
           i ||
             ((r.href = Ae.call(r)),
             (r.origin = _e.call(r)),
-            (r.protocol = Ne.call(r)),
-            (r.username = Re.call(r)),
+            (r.protocol = Re.call(r)),
+            (r.username = Ne.call(r)),
             (r.password = Ie.call(r)),
             (r.host = Me.call(r)),
             (r.hostname = Le.call(r)),
@@ -14947,10 +14971,10 @@
           ? t + '://' + q(e.host) + (null !== n ? ':' + n : '')
           : 'null';
       },
-      Ne = function () {
+      Re = function () {
         return x(this).scheme + ':';
       },
-      Re = function () {
+      Ne = function () {
         return x(this).username;
       },
       Ie = function () {
@@ -15000,11 +15024,11 @@
             O(t.searchParams).updateSearchParams(t.query);
           }),
           origin: Ve(_e),
-          protocol: Ve(Ne, function (e) {
+          protocol: Ve(Re, function (e) {
             var t = x(this);
             Ce(t, String(e) + ':', ae);
           }),
-          username: Ve(Re, function (e) {
+          username: Ve(Ne, function (e) {
             var t = x(this),
               n = p(String(e));
             if (!ee(t)) {
@@ -16798,8 +16822,8 @@
         );
       };
     _.displayName = 'InfoCircleOutlined';
-    var N = l['forwardRef'](_),
-      R = n('ODXe'),
+    var R = l['forwardRef'](_),
+      N = n('ODXe'),
       I = n('8HVG'),
       M = n('H84U');
     function L(e, t) {
@@ -16812,7 +16836,7 @@
             },
           },
           a = Object(I['a'])(i),
-          c = Object(R['a'])(a, 2),
+          c = Object(N['a'])(a, 2),
           u = c[0],
           s = c[1];
         function f(i) {
@@ -16969,7 +16993,7 @@
         });
       }
     }
-    var X = { success: w, info: N, error: j, warning: T };
+    var X = { success: w, info: R, error: j, warning: T };
     function J(e, t) {
       var n = e.duration,
         r = e.icon,
@@ -17197,7 +17221,7 @@
       return S;
     }),
       n.d(t, 'b', function () {
-        return N;
+        return R;
       }),
       n.d(t, 'c', function () {
         return g;
@@ -17404,7 +17428,7 @@
             };
       }, null);
     }
-    var N = (function (e) {
+    var R = (function (e) {
       function t() {
         return e.apply(this, arguments) || this;
       }
@@ -17451,15 +17475,15 @@
         t
       );
     })(i.a.Component);
-    function R(e) {
+    function N(e) {
       return '/' === e.charAt(0) ? e : '/' + e;
     }
     function I(e, t) {
-      return e ? Object(u['a'])({}, t, { pathname: R(e) + t.pathname }) : t;
+      return e ? Object(u['a'])({}, t, { pathname: N(e) + t.pathname }) : t;
     }
     function M(e, t) {
       if (!e) return t;
-      var n = R(e);
+      var n = N(e);
       return 0 !== t.pathname.indexOf(n)
         ? t
         : Object(u['a'])({}, t, { pathname: t.pathname.substr(n.length) });
@@ -17532,6 +17556,9 @@
       'left-arrow': 'left-arrow___3ySpa',
       'right-arrow': 'right-arrow___15uvq',
       carousel: 'carousel___2jSv5',
+      'banner-0': 'banner-0___3lBnA',
+      'banner-1': 'banner-1___14XVo',
+      'banner-2': 'banner-2___2LJYo',
       item: 'item___v3ktc',
       wrap: 'wrap___3zPNM',
       contact: 'contact___2Fre2',
@@ -17709,12 +17736,12 @@
               _++
             )
               A.push(y(x[_]));
-            var N = x.groups;
+            var R = x.groups;
             if (h) {
-              var R = [T].concat(A, P, p);
-              void 0 !== N && R.push(N);
-              var I = String(r.apply(void 0, R));
-            } else I = w(T, p, P, A, N, r);
+              var N = [T].concat(A, P, p);
+              void 0 !== R && N.push(R);
+              var I = String(r.apply(void 0, N));
+            } else I = w(T, p, P, A, R, r);
             P >= S && ((E += p.slice(S, P) + I), (S = P + T.length));
           }
           return E + p.slice(S);
@@ -18806,7 +18833,7 @@
       return _;
     }),
       n.d(t, 'c', function () {
-        return R;
+        return N;
       }),
       n.d(t, 'b', function () {
         return w;
@@ -19085,10 +19112,10 @@
           (Q.length = t.length),
           O.notifyListeners(Q.location, Q.action);
       }
-      function N(e) {
+      function R(e) {
         C(e) || M(v(e.state));
       }
-      function R() {
+      function N() {
         M(v(A()));
       }
       var I = !1;
@@ -19167,11 +19194,11 @@
       function K(e) {
         (q += e),
           1 === q && 1 === e
-            ? (window.addEventListener(T, N),
-              o && window.addEventListener(P, R))
+            ? (window.addEventListener(T, R),
+              o && window.addEventListener(P, N))
             : 0 === q &&
-              (window.removeEventListener(T, N),
-              o && window.removeEventListener(P, R));
+              (window.removeEventListener(T, R),
+              o && window.removeEventListener(P, N));
       }
       var G = !1;
       function Y(e) {
@@ -19208,10 +19235,10 @@
       };
       return Q;
     }
-    function N(e, t, n) {
+    function R(e, t, n) {
       return Math.min(Math.max(e, t), n);
     }
-    function R(e) {
+    function N(e) {
       void 0 === e && (e = {});
       var t = e,
         n = t.getUserConfirmation,
@@ -19230,7 +19257,7 @@
       function d() {
         return Math.random().toString(36).substr(2, u);
       }
-      var p = N(l, 0, i.length - 1),
+      var p = R(l, 0, i.length - 1),
         h = i.map(function (e) {
           return w(e, void 0, 'string' === typeof e ? d() : e.key || d());
         }),
@@ -19256,7 +19283,7 @@
         });
       }
       function b(e) {
-        var t = N(C.index + e, 0, C.entries.length - 1),
+        var t = R(C.index + e, 0, C.entries.length - 1),
           r = 'POP',
           o = C.entries[t];
         s.confirmTransitionTo(o, r, n, function (e) {
@@ -19329,8 +19356,8 @@
       P = T,
       A = r[j],
       _ = A && A[E],
-      N = Object.prototype,
-      R = r.RangeError,
+      R = Object.prototype,
+      N = r.RangeError,
       I = p.pack,
       M = p.unpack,
       L = function (e) {
@@ -19361,7 +19388,7 @@
       H = function (e, t, n, r) {
         var o = d(n),
           i = O(e);
-        if (o + t > i.byteLength) throw R(C);
+        if (o + t > i.byteLength) throw N(C);
         var a = O(i.buffer).bytes,
           l = o + i.byteOffset,
           c = a.slice(l, l + t);
@@ -19370,7 +19397,7 @@
       W = function (e, t, n, r, o, i) {
         var a = d(n),
           l = O(e);
-        if (a + t > l.byteLength) throw R(C);
+        if (a + t > l.byteLength) throw N(C);
         for (
           var c = O(l.buffer).bytes, u = a + l.byteOffset, s = r(+o), f = 0;
           f < t;
@@ -19397,7 +19424,7 @@
           (q = G[Y++]) in P || a(P, q, T[q]);
         K.constructor = P;
       }
-      v && h(_) !== N && v(_, N);
+      v && h(_) !== R && v(_, R);
       var $ = new A(new P(2)),
         Q = _.setInt8;
       $.setInt8(0, 2147483648),
@@ -19426,8 +19453,8 @@
           u(this, A, j), u(e, P, j);
           var r = O(e).byteLength,
             i = s(t);
-          if (i < 0 || i > r) throw R('Wrong offset');
-          if (((n = void 0 === n ? r - i : f(n)), i + n > r)) throw R(S);
+          if (i < 0 || i > r) throw N('Wrong offset');
+          if (((n = void 0 === n ? r - i : f(n)), i + n > r)) throw N(S);
           k(this, { buffer: e, byteLength: n, byteOffset: i }),
             o ||
               ((this.buffer = e), (this.byteLength = n), (this.byteOffset = i));
@@ -20260,7 +20287,7 @@
           }
           return n;
         })(m(Error));
-      function N(e) {
+      function R(e) {
         return new Promise(function (t, n) {
           var r = new FileReader();
           (r.onload = function () {
@@ -20270,7 +20297,7 @@
             r.readAsText(e, 'GBK');
         });
       }
-      function R(e) {
+      function N(e) {
         var t = arguments.length > 1 && void 0 !== arguments[1] && arguments[1],
           n =
             arguments.length > 2 && void 0 !== arguments[2]
@@ -20464,16 +20491,16 @@
                   try {
                     return r
                       .blob()
-                      .then(N)
+                      .then(R)
                       .then(function (e) {
-                        return R(e, !1, n, i);
+                        return N(e, !1, n, i);
                       });
                   } catch (y) {
                     throw new _(n, y.message, null, i, 'ParseError');
                   }
                 else if ('json' === u)
                   return r.text().then(function (e) {
-                    return R(e, p, n, i);
+                    return N(e, p, n, i);
                   });
                 try {
                   return r[u]();
@@ -22894,8 +22921,8 @@
       P = C.get,
       A = C.set,
       _ = E.f,
-      N = S.f,
-      R = Math.round,
+      R = S.f,
+      N = Math.round,
       I = o.RangeError,
       M = c.ArrayBuffer,
       L = c.DataView,
@@ -22935,7 +22962,7 @@
         );
       },
       $ = function (e, t) {
-        return Y(e, (t = v(t, !0))) ? s(2, e[t]) : N(e, t);
+        return Y(e, (t = v(t, !0))) ? s(2, e[t]) : R(e, t);
       },
       Q = function (e, t, n) {
         return !(Y(e, (t = v(t, !0))) && b(n) && y(n, 'value')) ||
@@ -22974,10 +23001,10 @@
             },
             C = function (e, t, r) {
               var o = P(e);
-              n && (r = (r = R(r)) < 0 ? 0 : r > 255 ? 255 : 255 & r),
+              n && (r = (r = N(r)) < 0 ? 0 : r > 255 ? 255 : 255 & r),
                 o.view[s](t * i + o.byteOffset, r, !0);
             },
-            N = function (e, t) {
+            R = function (e, t) {
               _(e, t, {
                 get: function () {
                   return S(this, t);
@@ -23041,7 +23068,7 @@
                   length: c,
                   view: new L(o),
                 });
-                while (s < c) N(e, s++);
+                while (s < c) R(e, s++);
               })),
               w && w(y, U),
               (m = y.prototype = g(B))),
@@ -23398,10 +23425,10 @@
         P = e.prototype,
         A = P[y] || P['@@iterator'] || (p && P[p]),
         _ = (!v && A) || S(p),
-        N = ('Array' == t && P.entries) || A;
+        R = ('Array' == t && P.entries) || A;
       if (
-        (N &&
-          ((x = i(N.call(new e()))),
+        (R &&
+          ((x = i(R.call(new e()))),
           h !== Object.prototype &&
             x.next &&
             (f ||
@@ -24407,7 +24434,7 @@
           t
         );
       },
-      N = function (e, t) {
+      R = function (e, t) {
         var n = {};
         return (
           t.forEach(function (t) {
@@ -24416,7 +24443,7 @@
           n
         );
       },
-      R = function (e) {
+      N = function (e) {
         var t,
           n = a.a.Children.count(e.children),
           r = e.listRef,
@@ -24658,17 +24685,17 @@
           a && (C = b.curY > b.startY ? 1 : -1);
           var T = Math.ceil(v / y),
             P = A(t.touchObject, a),
-            N = b.swipeLength;
+            R = b.swipeLength;
           return (
             m ||
               (((0 === u && ('right' === P || 'down' === P)) ||
                 (u + 1 >= T && ('left' === P || 'up' === P)) ||
                 (!_(t) && ('left' === P || 'up' === P))) &&
-                ((N = b.swipeLength * s),
+                ((R = b.swipeLength * s),
                 !1 === f && d && (d(P), (j['edgeDragged'] = !0)))),
             !p && g && (g(P), (j['swiped'] = !0)),
-            (x = o ? E + N * (w / O) * C : c ? E - N * C : E + N * C),
-            a && (x = E + N * C),
+            (x = o ? E + R * (w / O) * C : c ? E - R * C : E + R * C),
+            a && (x = E + R * C),
             (j = Object(l['a'])(
               Object(l['a'])({}, j),
               {},
@@ -25525,7 +25552,7 @@
               Object(s['a'])(i),
               'updateState',
               function (e, t, n) {
-                var r = R(e);
+                var r = N(e);
                 e = Object(l['a'])(
                   Object(l['a'])(Object(l['a'])({}, e), r),
                   {},
@@ -25903,7 +25930,7 @@
                   'slick-initialized': !0,
                 }),
                 c = Object(l['a'])(Object(l['a'])({}, i.props), i.state),
-                u = N(c, [
+                u = R(c, [
                   'fade',
                   'cssEase',
                   'speed',
@@ -25946,7 +25973,7 @@
                 !0 === i.props.dots &&
                   i.state.slideCount >= i.props.slidesToShow)
               ) {
-                var f = N(c, [
+                var f = R(c, [
                     'dotsClass',
                     'slideCount',
                     'slidesToShow',
@@ -25971,7 +25998,7 @@
                 )),
                   (e = a.a.createElement(ae, f));
               }
-              var p = N(c, [
+              var p = R(c, [
                 'infinite',
                 'centerMode',
                 'currentSlide',
@@ -26442,44 +26469,44 @@
         };
       return Object(Ee['jsxs'])('div', {
         children: [
-          Object(Ee['jsxs'])('section', {
+          Object(Ee['jsx'])('section', {
             className: je.a.banner,
-            children: [
-              Object(Ee['jsx'])('div', { className: je.a.bg }),
-              Object(Ee['jsxs'])('div', {
-                className: je.a.carousel,
-                children: [
-                  Object(Ee['jsx'])('span', {
-                    className: je.a['left-arrow'],
-                    onClick: n,
-                  }),
-                  Object(Ee['jsx'])('span', {
-                    className: je.a['right-arrow'],
-                    onClick: t,
-                  }),
-                  Object(Ee['jsx'])(we, {
-                    autoplay: !0,
-                    autoplaySpeed: 5e3,
-                    ref: e,
-                    children: Oe.banner.map((e, t) =>
-                      Object(Ee['jsx'])(
-                        'div',
-                        {
-                          className: je.a.item,
-                          children: Object(Ee['jsx'])('div', {
-                            className: je.a.wrap,
-                            children: Object(Ee['jsx'])('h3', {
-                              children: e.text,
-                            }),
+            children: Object(Ee['jsxs'])('div', {
+              className: je.a.carousel,
+              children: [
+                Object(Ee['jsx'])('span', {
+                  className: je.a['left-arrow'],
+                  onClick: n,
+                }),
+                Object(Ee['jsx'])('span', {
+                  className: je.a['right-arrow'],
+                  onClick: t,
+                }),
+                Object(Ee['jsx'])(we, {
+                  autoplay: !0,
+                  autoplaySpeed: 5e3,
+                  ref: e,
+                  effect: 'fade',
+                  children: Oe.banner.map((e, t) =>
+                    Object(Ee['jsx'])(
+                      'div',
+                      {
+                        className: ''
+                          .concat(je.a.item, ' ')
+                          .concat(je.a['banner-' + t]),
+                        children: Object(Ee['jsx'])('div', {
+                          className: je.a.wrap,
+                          children: Object(Ee['jsx'])('h3', {
+                            children: e.text,
                           }),
-                        },
-                        t,
-                      ),
+                        }),
+                      },
+                      t,
                     ),
-                  }),
-                ],
-              }),
-            ],
+                  ),
+                }),
+              ],
+            }),
           }),
           Object(Ee['jsx'])('section', {
             className: je.a.contact,
@@ -26648,12 +26675,12 @@
       P = s.getterFor(S),
       A = /\+/g,
       _ = Array(4),
-      N = function (e) {
+      R = function (e) {
         return (
           _[e - 1] || (_[e - 1] = RegExp('((?:%[\\da-f]{2}){' + e + '})', 'gi'))
         );
       },
-      R = function (e) {
+      N = function (e) {
         try {
           return decodeURIComponent(e);
         } catch (t) {
@@ -26666,7 +26693,7 @@
         try {
           return decodeURIComponent(t);
         } catch (r) {
-          while (n) t = t.replace(N(n--), R);
+          while (n) t = t.replace(R(n--), N);
           return t;
         }
       },
@@ -27863,8 +27890,8 @@
       P = n('VpIT'),
       A = n('93I0'),
       _ = n('0BK2'),
-      N = n('kOOl'),
-      R = n('tiKp'),
+      R = n('kOOl'),
+      N = n('tiKp'),
       I = n('5Tg+'),
       M = n('dG/n'),
       L = n('1E5z'),
@@ -27873,7 +27900,7 @@
       U = A('hidden'),
       B = 'Symbol',
       z = 'prototype',
-      V = R('toPrimitive'),
+      V = N('toPrimitive'),
       H = F.set,
       W = F.getterFor(B),
       q = Object[z],
@@ -27997,7 +28024,7 @@
               arguments.length && void 0 !== arguments[0]
                 ? String(arguments[0])
                 : void 0,
-            t = N(e),
+            t = R(e),
             n = function (e) {
               this === q && n.call(Z, e),
                 f(this, U) && f(this[U], t) && (this[U][t] = !1),
@@ -28009,7 +28036,7 @@
           return W(this).tag;
         }),
         T(K, 'withoutSetter', function (e) {
-          return ae(N(e), e);
+          return ae(R(e), e);
         }),
         (S.f = fe),
         (E.f = ce),
@@ -28017,7 +28044,7 @@
         (O.f = k.f = pe),
         (x.f = he),
         (I.f = function (e) {
-          return ae(R(e), e);
+          return ae(N(e), e);
         }),
         l &&
           ($(K[z], 'description', {
@@ -28893,17 +28920,17 @@
                 .replace(/'/g, '&#x27;');
         },
         T = function (e) {
-          var t = R(e, p.TITLE),
-            n = R(e, y.TITLE_TEMPLATE);
+          var t = N(e, p.TITLE),
+            n = N(e, y.TITLE_TEMPLATE);
           if (n && t)
             return n.replace(/%s/g, function () {
               return Array.isArray(t) ? t.join('') : t;
             });
-          var r = R(e, y.DEFAULT_TITLE);
+          var r = N(e, y.DEFAULT_TITLE);
           return t || r || void 0;
         },
         P = function (e) {
-          return R(e, y.ON_CHANGE_CLIENT_STATE) || function () {};
+          return N(e, y.ON_CHANGE_CLIENT_STATE) || function () {};
         },
         A = function (e, t) {
           return t
@@ -28936,7 +28963,7 @@
               return t;
             }, []);
         },
-        N = function (e, t, n) {
+        R = function (e, t, n) {
           var r = {};
           return n
             .filter(function (t) {
@@ -28998,7 +29025,7 @@
             }, [])
             .reverse();
         },
-        R = function (e, t) {
+        N = function (e, t) {
           for (var n = e.length - 1; n >= 0; n--) {
             var r = e[n];
             if (r.hasOwnProperty(t)) return r[t];
@@ -29009,19 +29036,19 @@
           return {
             baseTag: _([h.HREF, h.TARGET], e),
             bodyAttributes: A(d.BODY, e),
-            defer: R(e, y.DEFER),
-            encode: R(e, y.ENCODE_SPECIAL_CHARACTERS),
+            defer: N(e, y.DEFER),
+            encode: N(e, y.ENCODE_SPECIAL_CHARACTERS),
             htmlAttributes: A(d.HTML, e),
-            linkTags: N(p.LINK, [h.REL, h.HREF], e),
-            metaTags: N(
+            linkTags: R(p.LINK, [h.REL, h.HREF], e),
+            metaTags: R(
               p.META,
               [h.NAME, h.CHARSET, h.HTTPEQUIV, h.PROPERTY, h.ITEM_PROP],
               e,
             ),
-            noscriptTags: N(p.NOSCRIPT, [h.INNER_HTML], e),
+            noscriptTags: R(p.NOSCRIPT, [h.INNER_HTML], e),
             onChangeClientState: P(e),
-            scriptTags: N(p.SCRIPT, [h.SRC, h.INNER_HTML], e),
-            styleTags: N(p.STYLE, [h.CSS_TEXT], e),
+            scriptTags: R(p.SCRIPT, [h.SRC, h.INNER_HTML], e),
+            styleTags: R(p.STYLE, [h.CSS_TEXT], e),
             title: T(e),
             titleAttributes: A(d.TITLE, e),
           };
@@ -30298,30 +30325,30 @@
     function _(e) {
       return P(E, e);
     }
-    function N(e) {
+    function R(e) {
       if ('function' !== typeof e.render)
         throw new Error(
           'LoadableMap requires a `render(loaded, props)` function',
         );
       return P(S, e);
     }
-    function R(e, t) {
+    function N(e, t) {
       var n = [];
       while (e.length) {
         var r = e.pop();
         n.push(r(t));
       }
       return Promise.all(n).then(function () {
-        if (e.length) return R(e, t);
+        if (e.length) return N(e, t);
       });
     }
     function I(e, t) {
       if (!e) throw new Error(t);
     }
-    (_.Map = N),
+    (_.Map = R),
       (_.preloadAll = function () {
         return new Promise(function (e, t) {
-          R(k).then(e, t);
+          N(k).then(e, t);
         });
       }),
       (_.preloadReady = function () {
@@ -30331,7 +30358,7 @@
           var n = function () {
             return (j = !0), t();
           };
-          R(x, e).then(n, n);
+          N(x, e).then(n, n);
         });
       }),
       'undefined' !== typeof window &&
@@ -31127,7 +31154,7 @@
         var n = null != arguments[t] ? arguments[t] : {};
         t % 2
           ? C(Object(n), !0).forEach(function (t) {
-              N(e, t, n[t]);
+              R(e, t, n[t]);
             })
           : Object.getOwnPropertyDescriptors
           ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(n))
@@ -31157,7 +31184,7 @@
     function _(e, t, n) {
       return t && A(e.prototype, t), n && A(e, n), e;
     }
-    function N(e, t, n) {
+    function R(e, t, n) {
       return (
         t in e
           ? Object.defineProperty(e, t, {
@@ -31170,7 +31197,7 @@
         e
       );
     }
-    function R(e, t) {
+    function N(e, t) {
       if (e) {
         if ('string' === typeof e) return I(e, t);
         var n = Object.prototype.toString.call(e).slice(8, -1);
@@ -31197,7 +31224,7 @@
       if (!n) {
         if (
           Array.isArray(e) ||
-          (n = R(e)) ||
+          (n = N(e)) ||
           (t && e && 'number' === typeof e.length)
         ) {
           n && (e = n);
@@ -32801,8 +32828,8 @@
       };
       return n;
     }
-    var N,
-      R,
+    var R,
+      N,
       I,
       M,
       L = n('wEI+'),
@@ -32816,13 +32843,13 @@
       return D++;
     }
     function W(e) {
-      void 0 !== e.top && ((R = e.top), (N = null)),
+      void 0 !== e.top && ((N = e.top), (R = null)),
         void 0 !== e.duration && (F = e.duration),
         void 0 !== e.prefixCls && (U = e.prefixCls),
         void 0 !== e.getContainer && (I = e.getContainer),
         void 0 !== e.transitionName &&
-          ((B = e.transitionName), (N = null), (z = !0)),
-        void 0 !== e.maxCount && ((M = e.maxCount), (N = null)),
+          ((B = e.transitionName), (R = null), (z = !0)),
+        void 0 !== e.maxCount && ((M = e.maxCount), (R = null)),
         void 0 !== e.rtl && (V = e.rtl);
     }
     function q(e, t) {
@@ -32832,19 +32859,19 @@
         i = r.getRootPrefixCls,
         a = o('message', n || U),
         l = i(e.rootPrefixCls, a);
-      if (N) t({ prefixCls: a, rootPrefixCls: l, instance: N });
+      if (R) t({ prefixCls: a, rootPrefixCls: l, instance: R });
       else {
         var u = {
           prefixCls: a,
           transitionName: z ? B : ''.concat(l, '-').concat(B),
-          style: { top: R },
+          style: { top: N },
           getContainer: I,
           maxCount: M,
         };
         c['a'].newInstance(u, function (e) {
-          N
-            ? t({ prefixCls: a, rootPrefixCls: l, instance: N })
-            : ((N = e), t({ prefixCls: a, rootPrefixCls: l, instance: e }));
+          R
+            ? t({ prefixCls: a, rootPrefixCls: l, instance: R })
+            : ((R = e), t({ prefixCls: a, rootPrefixCls: l, instance: e }));
         });
       }
     }
@@ -32893,7 +32920,7 @@
           });
         }),
         o = function () {
-          N && N.removeNotice(t);
+          R && R.removeNotice(t);
         };
       return (
         (o.then = function (e, t) {
@@ -32912,15 +32939,15 @@
       open: Y,
       config: W,
       destroy: function (e) {
-        if (N)
+        if (R)
           if (e) {
-            var t = N,
+            var t = R,
               n = t.removeNotice;
             n(e);
           } else {
-            var r = N,
+            var r = R,
               o = r.destroy;
-            o(), (N = null);
+            o(), (R = null);
           }
       },
     };
@@ -33142,7 +33169,7 @@
           : null)
       );
     }
-    function N(e) {
+    function R(e) {
       var t = e.prefixCls,
         n = e.visible,
         i = e.zIndex,
@@ -33171,7 +33198,7 @@
         )
       );
     }
-    var R,
+    var N,
       I = n('U8pU'),
       M = n('x/xZ');
     function L(e, t) {
@@ -33238,12 +33265,12 @@
     }
     var B = { Webkit: '-webkit-', Moz: '-moz-', ms: '-ms-', O: '-o-' };
     function z() {
-      if (void 0 !== R) return R;
-      R = '';
+      if (void 0 !== N) return N;
+      N = '';
       var e = document.createElement('p').style,
         t = 'Transform';
-      for (var n in B) n + t in e && (R = n);
-      return R;
+      for (var n in B) n + t in e && (N = n);
+      return N;
     }
     function V() {
       return z() ? ''.concat(z(), 'TransitionProperty') : 'transitionProperty';
@@ -33566,8 +33593,8 @@
           return ('CSS1Compat' === r.compatMode && a) || (o && o[n]) || a;
         });
     });
-    var Ne = { position: 'absolute', visibility: 'hidden', display: 'block' };
-    function Re() {
+    var Re = { position: 'absolute', visibility: 'hidden', display: 'block' };
+    function Ne() {
       for (var e = arguments.length, t = new Array(e), n = 0; n < e; n++)
         t[n] = arguments[n];
       var r,
@@ -33575,7 +33602,7 @@
       return (
         0 !== o.offsetWidth
           ? (r = _e.apply(void 0, t))
-          : Te(o, Ne, function () {
+          : Te(o, Re, function () {
               r = _e.apply(void 0, t);
             }),
         r
@@ -33588,12 +33615,12 @@
     Oe(['width', 'height'], function (e) {
       var t = e.charAt(0).toUpperCase() + e.slice(1);
       Ae['outer'.concat(t)] = function (t, n) {
-        return t && Re(t, e, n ? Ce : Se);
+        return t && Ne(t, e, n ? Ce : Se);
       };
       var n = 'width' === e ? ['Left', 'Right'] : ['Top', 'Bottom'];
       Ae[e] = function (t, r) {
         var o = r;
-        if (void 0 === o) return t && Re(t, e, je);
+        if (void 0 === o) return t && Ne(t, e, je);
         if (t) {
           var i = ke(t);
           return i && (o += Pe(t, ['padding', 'border'], n)), ee(t, e, o);
@@ -34237,9 +34264,9 @@
           S = Object(s['useState'])(),
           T = Object(C['a'])(S, 2),
           P = T[0],
-          N = T[1],
-          R = Ot(f),
-          I = Object(C['a'])(R, 2),
+          R = T[1],
+          N = Ot(f),
+          I = Object(C['a'])(N, 2),
           M = I[0],
           L = I[1];
         function F() {
@@ -34259,7 +34286,7 @@
         }
         function q(e, t) {
           var n = m(t);
-          P !== n && N(n),
+          P !== n && R(n),
             'align' === B &&
               (P !== n
                 ? Promise.resolve().then(function () {
@@ -34442,17 +34469,17 @@
         var m = h
           ? s['createElement'](Et, Object(o['a'])({}, y, { mobile: i, ref: t }))
           : s['createElement'](xt, Object(o['a'])({}, y, { ref: t }));
-        return s['createElement']('div', null, s['createElement'](N, y), m);
+        return s['createElement']('div', null, s['createElement'](R, y), m);
       });
     Ct.displayName = 'Popup';
     var Tt = Ct,
       Pt = s['createContext'](null),
       At = Pt;
     function _t() {}
-    function Nt() {
+    function Rt() {
       return '';
     }
-    function Rt(e) {
+    function Nt(e) {
       return e ? e.ownerDocument : window.document;
     }
     var It = [
@@ -35060,8 +35087,8 @@
         (t.contextType = At),
         (t.defaultProps = {
           prefixCls: 'rc-trigger-popup',
-          getPopupClassNameFromAlign: Nt,
-          getDocument: Rt,
+          getPopupClassNameFromAlign: Rt,
+          getDocument: Nt,
           onPopupVisibleChange: _t,
           afterPopupVisibleChange: _t,
           onPopupAlign: _t,
@@ -35609,7 +35636,7 @@
         r
       );
     }
-    function N(e) {
+    function R(e) {
       if (-1 === e._status) {
         var t = e._result;
         (t = t()),
@@ -35628,14 +35655,14 @@
       if (1 === e._status) return e._result;
       throw e._result;
     }
-    var R = { current: null };
+    var N = { current: null };
     function I() {
-      var e = R.current;
+      var e = N.current;
       if (null === e) throw Error(h(321));
       return e;
     }
     var M = {
-      ReactCurrentDispatcher: R,
+      ReactCurrentDispatcher: N,
       ReactCurrentBatchConfig: { transition: 0 },
       ReactCurrentOwner: O,
       IsSomeRendererActing: { current: !1 },
@@ -35739,7 +35766,7 @@
       }),
       (t.isValidElement = S),
       (t.lazy = function (e) {
-        return { $$typeof: s, _payload: { _status: -1, _result: e }, _init: N };
+        return { $$typeof: s, _payload: { _status: -1, _result: e }, _init: R };
       }),
       (t.memo = function (e, t) {
         return { $$typeof: u, type: e, compare: void 0 === t ? null : t };
@@ -35975,7 +36002,7 @@
       P = n('25BE'),
       A = n('BsWD'),
       _ = n('PYwp');
-    function N(e) {
+    function R(e) {
       return (
         Object(T['a'])(e) ||
         Object(P['a'])(e) ||
@@ -35983,10 +36010,10 @@
         Object(_['a'])()
       );
     }
-    function R(e, t, n, r) {
+    function N(e, t, n, r) {
       if (!t.length) return n;
       var o,
-        i = N(t),
+        i = R(t),
         a = i[0],
         l = i.slice(1);
       return (
@@ -35998,7 +36025,7 @@
             : []),
         r && void 0 === n && 1 === l.length
           ? delete o[a][l[0]]
-          : (o[a] = R(o[a], l, n, r)),
+          : (o[a] = N(o[a], l, n, r)),
         o
       );
     }
@@ -36006,7 +36033,7 @@
       var r = arguments.length > 3 && void 0 !== arguments[3] && arguments[3];
       return t.length && r && void 0 === n && !C(e, t.slice(0, -1))
         ? e
-        : R(e, t, n, r);
+        : N(e, t, n, r);
     }
     function M(e) {
       return O(e);
@@ -37702,8 +37729,8 @@
           P = T.useSubscribe,
           A = T.setInitialValues,
           _ = T.setCallbacks,
-          N = T.setValidateMessages,
-          R = T.setPreserve;
+          R = T.setValidateMessages,
+          N = T.setPreserve;
         o['useImperativeHandle'](t, function () {
           return C;
         }),
@@ -37718,7 +37745,7 @@
             },
             [j, C, n],
           ),
-          N(Object(c['a'])(Object(c['a'])({}, j.validateMessages), h)),
+          R(Object(c['a'])(Object(c['a'])({}, j.validateMessages), h)),
           _({
             onValuesChange: b,
             onFieldsChange: function (e) {
@@ -37739,7 +37766,7 @@
             },
             onFinishFailed: k,
           }),
-          R(s);
+          N(s);
         var I = o['useRef'](null);
         A(i, !I.current), I.current || (I.current = !0);
         var M = f,
@@ -37799,8 +37826,8 @@
         ? Object(r['a'])(Object(r['a'])({}, Ae), e)
         : Object(r['a'])({}, Pe['a'].Modal);
     }
-    var Ne = n('YlG9'),
-      Re = 'internalMark',
+    var Re = n('YlG9'),
+      Ne = 'internalMark',
       Ie = (function (e) {
         Object(p['a'])(n, e);
         var t = Object(h['a'])(n);
@@ -37811,7 +37838,7 @@
             (r = t.call(this, e)),
             _e(e.locale && e.locale.Modal),
             Object(Te['a'])(
-              e._ANT_MARK__ === Re,
+              e._ANT_MARK__ === Ne,
               'LocaleProvider',
               '`LocaleProvider` is deprecated. Please use `locale` with `ConfigProvider` instead: http://u.ant.design/locale',
             ),
@@ -37846,7 +37873,7 @@
                   t = e.locale,
                   n = e.children;
                 return o['createElement'](
-                  Ne['a'].Provider,
+                  Re['a'].Provider,
                   {
                     value: Object(r['a'])(Object(r['a'])({}, t), { exist: !0 }),
                   },
@@ -37972,7 +37999,7 @@
             (j = Object(r['a'])(Object(r['a'])({}, j), u.validateMessages)),
           Object.keys(j).length > 0 &&
             (x = o['createElement'](Oe, { validateMessages: j }, a)),
-          s && (x = o['createElement'](Ie, { locale: s, _ANT_MARK__: Re }, x)),
+          s && (x = o['createElement'](Ie, { locale: s, _ANT_MARK__: Ne }, x)),
           b && (x = o['createElement'](i['a'].Provider, { value: k }, x)),
           f && (x = o['createElement'](De['a'], { size: f }, x)),
           o['createElement'](Fe['b'].Provider, { value: O }, x)
@@ -38484,8 +38511,8 @@
       P = 60114,
       A = 60109,
       _ = 60110,
-      N = 60112,
-      R = 60113,
+      R = 60112,
+      N = 60113,
       I = 60120,
       M = 60115,
       L = 60116,
@@ -38503,8 +38530,8 @@
         (P = V('react.profiler')),
         (A = V('react.provider')),
         (_ = V('react.context')),
-        (N = V('react.forward_ref')),
-        (R = V('react.suspense')),
+        (R = V('react.forward_ref')),
+        (N = V('react.suspense')),
         (I = V('react.suspense_list')),
         (M = V('react.memo')),
         (L = V('react.lazy')),
@@ -38637,7 +38664,7 @@
           return 'Profiler';
         case T:
           return 'StrictMode';
-        case R:
+        case N:
           return 'Suspense';
         case I:
           return 'SuspenseList';
@@ -38648,7 +38675,7 @@
             return (e.displayName || 'Context') + '.Consumer';
           case A:
             return (e._context.displayName || 'Context') + '.Provider';
-          case N:
+          case R:
             var t = e.render;
             return (
               (t = t.displayName || t.name || ''),
@@ -39074,8 +39101,8 @@
     }
     var Ae = null,
       _e = null,
-      Ne = null;
-    function Re(e) {
+      Re = null;
+    function Ne(e) {
       if ((e = So(e))) {
         if ('function' !== typeof Ae) throw Error(a(280));
         var t = e.stateNode;
@@ -39083,14 +39110,14 @@
       }
     }
     function Ie(e) {
-      _e ? (Ne ? Ne.push(e) : (Ne = [e])) : (_e = e);
+      _e ? (Re ? Re.push(e) : (Re = [e])) : (_e = e);
     }
     function Me() {
       if (_e) {
         var e = _e,
-          t = Ne;
-        if (((Ne = _e = null), Re(e), t))
-          for (e = 0; e < t.length; e++) Re(t[e]);
+          t = Re;
+        if (((Re = _e = null), Ne(e), t))
+          for (e = 0; e < t.length; e++) Ne(t[e]);
       }
     }
     function Le(e, t) {
@@ -39104,7 +39131,7 @@
       Be = !1,
       ze = !1;
     function Ve() {
-      (null === _e && null === Ne) || (De(), Me());
+      (null === _e && null === Re) || (De(), Me());
     }
     function He(e, t, n) {
       if (ze) return e(t, n);
@@ -39481,18 +39508,18 @@
         animationstart: At('Animation', 'AnimationStart'),
         transitionend: At('Transition', 'TransitionEnd'),
       },
-      Nt = {},
-      Rt = {};
+      Rt = {},
+      Nt = {};
     function It(e) {
-      if (Nt[e]) return Nt[e];
+      if (Rt[e]) return Rt[e];
       if (!_t[e]) return e;
       var t,
         n = _t[e];
-      for (t in n) if (n.hasOwnProperty(t) && t in Rt) return (Nt[e] = n[t]);
+      for (t in n) if (n.hasOwnProperty(t) && t in Nt) return (Rt[e] = n[t]);
       return e;
     }
     f &&
-      ((Rt = document.createElement('div').style),
+      ((Nt = document.createElement('div').style),
       'AnimationEvent' in window ||
         (delete _t.animationend.animation,
         delete _t.animationiteration.animation,
@@ -39919,9 +39946,9 @@
       Pn = o({}, Cn, { dataTransfer: 0 }),
       An = gn(Pn),
       _n = o({}, En, { relatedTarget: 0 }),
-      Nn = gn(_n),
-      Rn = o({}, xn, { animationName: 0, elapsedTime: 0, pseudoElement: 0 }),
-      In = gn(Rn),
+      Rn = gn(_n),
+      Nn = o({}, xn, { animationName: 0, elapsedTime: 0, pseudoElement: 0 }),
+      In = gn(Nn),
       Mn = o({}, xn, {
         clipboardData: function (e) {
           return 'clipboardData' in e ? e.clipboardData : window.clipboardData;
@@ -40233,8 +40260,8 @@
       return (e === t && (0 !== e || 1 / e === 1 / t)) || (e !== e && t !== t);
     }
     var _r = 'function' === typeof Object.is ? Object.is : Ar,
-      Nr = Object.prototype.hasOwnProperty;
-    function Rr(e, t) {
+      Rr = Object.prototype.hasOwnProperty;
+    function Nr(e, t) {
       if (_r(e, t)) return !0;
       if (
         'object' !== typeof e ||
@@ -40247,7 +40274,7 @@
         r = Object.keys(t);
       if (n.length !== r.length) return !1;
       for (r = 0; r < n.length; r++)
-        if (!Nr.call(t, n[r]) || !_r(e[n[r]], t[n[r]])) return !1;
+        if (!Rr.call(t, n[r]) || !_r(e[n[r]], t[n[r]])) return !1;
       return !0;
     }
     function Ir(e) {
@@ -40339,7 +40366,7 @@
               focusNode: r.focusNode,
               focusOffset: r.focusOffset,
             })),
-        (Vr && Rr(Vr, r)) ||
+        (Vr && Nr(Vr, r)) ||
           ((Vr = r),
           (r = oo(zr, 'onSelect')),
           0 < r.length &&
@@ -40546,14 +40573,14 @@
                 c = qn;
                 break;
               case 'focusin':
-                (u = 'focus'), (c = Nn);
+                (u = 'focus'), (c = Rn);
                 break;
               case 'focusout':
-                (u = 'blur'), (c = Nn);
+                (u = 'blur'), (c = Rn);
                 break;
               case 'beforeblur':
               case 'afterblur':
-                c = Nn;
+                c = Rn;
                 break;
               case 'click':
                 if (2 === n.button) break e;
@@ -40937,18 +40964,18 @@
     }
     var Ao = [],
       _o = -1;
-    function No(e) {
+    function Ro(e) {
       return { current: e };
     }
-    function Ro(e) {
+    function No(e) {
       0 > _o || ((e.current = Ao[_o]), (Ao[_o] = null), _o--);
     }
     function Io(e, t) {
       _o++, (Ao[_o] = e.current), (e.current = t);
     }
     var Mo = {},
-      Lo = No(Mo),
-      Fo = No(!1),
+      Lo = Ro(Mo),
+      Fo = Ro(!1),
       Do = Mo;
     function Uo(e, t) {
       var n = e.type.contextTypes;
@@ -40971,7 +40998,7 @@
       return (e = e.childContextTypes), null !== e && void 0 !== e;
     }
     function zo() {
-      Ro(Fo), Ro(Lo);
+      No(Fo), No(Lo);
     }
     function Vo(e, t, n) {
       if (Lo.current !== Mo) throw Error(a(168));
@@ -41002,10 +41029,10 @@
       n
         ? ((e = Ho(e, t, Do)),
           (r.__reactInternalMemoizedMergedChildContext = e),
-          Ro(Fo),
-          Ro(Lo),
+          No(Fo),
+          No(Lo),
           Io(Lo, e))
-        : Ro(Fo),
+        : No(Fo),
         Io(Fo, n);
     }
     var Ko = null,
@@ -41110,7 +41137,7 @@
       }
       return t;
     }
-    var Oi = No(null),
+    var Oi = Ro(null),
       ki = null,
       xi = null,
       ji = null;
@@ -41119,7 +41146,7 @@
     }
     function Si(e) {
       var t = Oi.current;
-      Ro(Oi), (e.type._context._currentValue = t);
+      No(Oi), (e.type._context._currentValue = t);
     }
     function Ci(e, t) {
       for (; null !== e; ) {
@@ -41163,7 +41190,7 @@
         effects: null,
       };
     }
-    function Ni(e, t) {
+    function Ri(e, t) {
       (e = e.updateQueue),
         t.updateQueue === e &&
           (t.updateQueue = {
@@ -41174,7 +41201,7 @@
             effects: e.effects,
           });
     }
-    function Ri(e, t) {
+    function Ni(e, t) {
       return {
         eventTime: e,
         lane: t,
@@ -41349,7 +41376,7 @@
         e = e._reactInternals;
         var r = Mc(),
           o = Lc(e),
-          i = Ri(r, o);
+          i = Ni(r, o);
         (i.payload = t),
           void 0 !== n && null !== n && (i.callback = n),
           Ii(e, i),
@@ -41359,7 +41386,7 @@
         e = e._reactInternals;
         var r = Mc(),
           o = Lc(e),
-          i = Ri(r, o);
+          i = Ni(r, o);
         (i.tag = 1),
           (i.payload = t),
           void 0 !== n && null !== n && (i.callback = n),
@@ -41370,7 +41397,7 @@
         e = e._reactInternals;
         var n = Mc(),
           r = Lc(e),
-          o = Ri(n, r);
+          o = Ni(n, r);
         (o.tag = 2),
           void 0 !== t && null !== t && (o.callback = t),
           Ii(e, o),
@@ -41384,8 +41411,8 @@
           ? e.shouldComponentUpdate(r, i, a)
           : !t.prototype ||
             !t.prototype.isPureReactComponent ||
-            !Rr(n, r) ||
-            !Rr(o, i)
+            !Nr(n, r) ||
+            !Nr(o, i)
       );
     }
     function Vi(e, t, n) {
@@ -41801,9 +41828,9 @@
     var $i = Yi(!0),
       Qi = Yi(!1),
       Xi = {},
-      Ji = No(Xi),
-      Zi = No(Xi),
-      ea = No(Xi);
+      Ji = Ro(Xi),
+      Zi = Ro(Xi),
+      ea = Ro(Xi);
     function ta(e) {
       if (e === Xi) throw Error(a(174));
       return e;
@@ -41820,10 +41847,10 @@
             (e = e.tagName),
             (t = be(t, e));
       }
-      Ro(Ji), Io(Ji, t);
+      No(Ji), Io(Ji, t);
     }
     function ra() {
-      Ro(Ji), Ro(Zi), Ro(ea);
+      No(Ji), No(Zi), No(ea);
     }
     function oa(e) {
       ta(ea.current);
@@ -41832,9 +41859,9 @@
       t !== n && (Io(Zi, e), Io(Ji, n));
     }
     function ia(e) {
-      Zi.current === e && (Ro(Ji), Ro(Zi));
+      Zi.current === e && (No(Ji), No(Zi));
     }
-    var aa = No(0);
+    var aa = Ro(0);
     function la(e) {
       for (var t = e; null !== t; ) {
         if (13 === t.tag) {
@@ -42041,10 +42068,10 @@
       }
       return ja;
     }
-    function Na(e, t) {
+    function Ra(e, t) {
       return 'function' === typeof t ? t(e) : t;
     }
-    function Ra(e) {
+    function Na(e) {
       var t = _a(),
         n = t.queue;
       if (null === n) throw Error(a(311));
@@ -42198,7 +42225,7 @@
           ((e = {
             pending: null,
             dispatch: null,
-            lastRenderedReducer: Na,
+            lastRenderedReducer: Ra,
             lastRenderedState: f,
           }),
           (e.dispatch = s = Za.bind(null, ka, e)),
@@ -42222,7 +42249,7 @@
           {
             pending: null,
             dispatch: null,
-            lastRenderedReducer: Na,
+            lastRenderedReducer: Ra,
             lastRenderedState: e,
           }),
         (e = e.dispatch = Za.bind(null, ka, e)),
@@ -42495,14 +42522,14 @@
         useImperativeHandle: Ya,
         useLayoutEffect: Ka,
         useMemo: Xa,
-        useReducer: Ra,
+        useReducer: Na,
         useRef: za,
         useState: function () {
-          return Ra(Na);
+          return Na(Ra);
         },
         useDebugValue: $a,
         useDeferredValue: function (e) {
-          var t = Ra(Na),
+          var t = Na(Ra),
             n = t[0],
             r = t[1];
           return (
@@ -42522,12 +42549,12 @@
           );
         },
         useTransition: function () {
-          var e = Ra(Na)[0];
+          var e = Na(Ra)[0];
           return [za().current, e];
         },
         useMutableSource: Fa,
         useOpaqueIdentifier: function () {
-          return Ra(Na)[0];
+          return Na(Ra)[0];
         },
         unstable_isNewReconciler: !1,
       },
@@ -42542,11 +42569,11 @@
         useReducer: Ia,
         useRef: za,
         useState: function () {
-          return Ia(Na);
+          return Ia(Ra);
         },
         useDebugValue: $a,
         useDeferredValue: function (e) {
-          var t = Ia(Na),
+          var t = Ia(Ra),
             n = t[0],
             r = t[1];
           return (
@@ -42566,12 +42593,12 @@
           );
         },
         useTransition: function () {
-          var e = Ia(Na)[0];
+          var e = Ia(Ra)[0];
           return [za().current, e];
         },
         useMutableSource: Fa,
         useOpaqueIdentifier: function () {
-          return Ia(Na)[0];
+          return Ia(Ra)[0];
         },
         unstable_isNewReconciler: !1,
       },
@@ -42613,7 +42640,7 @@
         0 === (o & i) &&
         ((o = a.memoizedProps),
         (n = n.compare),
-        (n = null !== n ? n : Rr),
+        (n = null !== n ? n : Nr),
         n(o, r) && e.ref === t.ref)
           ? Tl(e, t, i)
           : ((t.flags |= 1),
@@ -42624,7 +42651,7 @@
       );
     }
     function ul(e, t, n, r, o, i) {
-      if (null !== e && Rr(e.memoizedProps, r) && e.ref === t.ref) {
+      if (null !== e && Nr(e.memoizedProps, r) && e.ref === t.ref) {
         if (((il = !1), 0 === (i & o))) return (t.lanes = e.lanes), Tl(e, t, i);
         0 !== (16384 & e.flags) && (il = !0);
       }
@@ -42730,7 +42757,7 @@
               (r = !1));
       } else {
         (a = t.stateNode),
-          Ni(e, t),
+          Ri(e, t),
           (l = t.memoizedProps),
           (u = t.type === t.elementType ? l : wi(t.type, l)),
           (a.props = u),
@@ -43064,8 +43091,8 @@
         case 3:
           return (
             ra(),
-            Ro(Fo),
-            Ro(Lo),
+            No(Fo),
+            No(Lo),
             ba(),
             (r = t.stateNode),
             r.pendingContext &&
@@ -43282,7 +43309,7 @@
           return null;
         case 13:
           return (
-            Ro(aa),
+            No(aa),
             (r = t.memoizedState),
             0 !== (64 & t.flags)
               ? ((t.lanes = n), t)
@@ -43312,7 +43339,7 @@
         case 17:
           return Bo(t.type) && zo(), null;
         case 19:
-          if ((Ro(aa), (r = t.memoizedState), null === r)) return null;
+          if ((No(aa), (r = t.memoizedState), null === r)) return null;
           if (((l = 0 !== (64 & t.flags)), (u = r.rendering), null === u))
             if (l) Pl(r, !1);
             else {
@@ -43431,19 +43458,19 @@
           var t = e.flags;
           return 4096 & t ? ((e.flags = (-4097 & t) | 64), e) : null;
         case 3:
-          if ((ra(), Ro(Fo), Ro(Lo), ba(), (t = e.flags), 0 !== (64 & t)))
+          if ((ra(), No(Fo), No(Lo), ba(), (t = e.flags), 0 !== (64 & t)))
             throw Error(a(285));
           return (e.flags = (-4097 & t) | 64), e;
         case 5:
           return ia(e), null;
         case 13:
           return (
-            Ro(aa),
+            No(aa),
             (t = e.flags),
             4096 & t ? ((e.flags = (-4097 & t) | 64), e) : null
           );
         case 19:
-          return Ro(aa), null;
+          return No(aa), null;
         case 4:
           return ra(), null;
         case 10:
@@ -43455,7 +43482,7 @@
           return null;
       }
     }
-    function Nl(e, t) {
+    function Rl(e, t) {
       try {
         var n = '',
           r = t;
@@ -43468,7 +43495,7 @@
       }
       return { value: e, source: t, stack: o };
     }
-    function Rl(e, t) {
+    function Nl(e, t) {
       try {
         console.error(t.value);
       } catch (n) {
@@ -43578,22 +43605,22 @@
       });
     var Il = 'function' === typeof WeakMap ? WeakMap : Map;
     function Ml(e, t, n) {
-      (n = Ri(-1, n)), (n.tag = 3), (n.payload = { element: null });
+      (n = Ni(-1, n)), (n.tag = 3), (n.payload = { element: null });
       var r = t.value;
       return (
         (n.callback = function () {
-          gc || ((gc = !0), (wc = r)), Rl(e, t);
+          gc || ((gc = !0), (wc = r)), Nl(e, t);
         }),
         n
       );
     }
     function Ll(e, t, n) {
-      (n = Ri(-1, n)), (n.tag = 3);
+      (n = Ni(-1, n)), (n.tag = 3);
       var r = e.type.getDerivedStateFromError;
       if ('function' === typeof r) {
         var o = t.value;
         n.payload = function () {
-          return Rl(e, t), r(o);
+          return Nl(e, t), r(o);
         };
       }
       var i = e.stateNode;
@@ -43602,7 +43629,7 @@
           'function' === typeof i.componentDidCatch &&
           (n.callback = function () {
             'function' !== typeof r &&
-              (null === Oc ? (Oc = new Set([this])) : Oc.add(this), Rl(e, t));
+              (null === Oc ? (Oc = new Set([this])) : Oc.add(this), Nl(e, t));
             var n = t.stack;
             this.componentDidCatch(t.value, {
               componentStack: null !== n ? n : '',
@@ -44114,7 +44141,7 @@
       rc = null,
       oc = 0,
       ic = 0,
-      ac = No(0),
+      ac = Ro(0),
       lc = 0,
       cc = null,
       uc = 0,
@@ -44142,8 +44169,8 @@
       Pc = null,
       Ac = -1,
       _c = 0,
-      Nc = 0,
-      Rc = null,
+      Rc = 0,
+      Nc = null,
       Ic = !1;
     function Mc() {
       return 0 !== (48 & tc) ? di() : -1 !== Ac ? Ac : (Ac = di());
@@ -44152,8 +44179,8 @@
       if (((e = e.mode), 0 === (2 & e))) return 1;
       if (0 === (4 & e)) return 99 === pi() ? 1 : 2;
       if ((0 === _c && (_c = uc), 0 !== gi.transition)) {
-        0 !== Nc && (Nc = null !== pc ? pc.pendingLanes : 0), (e = _c);
-        var t = 4186112 & ~Nc;
+        0 !== Rc && (Rc = null !== pc ? pc.pendingLanes : 0), (e = _c);
+        var t = 4186112 & ~Rc;
         return (
           (t &= -t),
           0 === t && ((e = 4186112 & ~e), (t = e & -e), 0 === t && (t = 8192)),
@@ -44238,7 +44265,7 @@
       }
     }
     function Bc(e) {
-      if (((Ac = -1), (Nc = _c = 0), 0 !== (48 & tc))) throw Error(a(327));
+      if (((Ac = -1), (Rc = _c = 0), 0 !== (48 & tc))) throw Error(a(327));
       var t = e.callbackNode;
       if (iu() && e.callbackNode !== t) return null;
       var n = Yt(e, e === nc ? oc : 0);
@@ -44409,7 +44436,7 @@
       Io(ac, ic), (ic |= t), (uc |= t);
     }
     function Gc() {
-      (ic = ac.current), Ro(ac);
+      (ic = ac.current), No(ac);
     }
     function Yc(e, t) {
       (e.finishedWork = null), (e.finishedLanes = 0);
@@ -44423,7 +44450,7 @@
                 null !== r && void 0 !== r && zo();
               break;
             case 3:
-              ra(), Ro(Fo), Ro(Lo), ba();
+              ra(), No(Fo), No(Lo), ba();
               break;
             case 5:
               ia(r);
@@ -44432,10 +44459,10 @@
               ra();
               break;
             case 13:
-              Ro(aa);
+              No(aa);
               break;
             case 19:
-              Ro(aa);
+              No(aa);
               break;
             case 10:
               Si(r);
@@ -44525,7 +44552,7 @@
                     )
                       if (null === l.alternate) l.tag = 17;
                       else {
-                        var b = Ri(-1, 1);
+                        var b = Ni(-1, 1);
                         (b.tag = 2), Ii(l, b);
                       }
                     l.lanes |= 1;
@@ -44556,7 +44583,7 @@
                   ' suspended while rendering, but no fallback UI was specified.\n\nAdd a <Suspense fallback=...> component higher in the tree to provide a loading indicator or placeholder to display.',
               );
             }
-            5 !== lc && (lc = 2), (c = Nl(c, l)), (d = a);
+            5 !== lc && (lc = 2), (c = Rl(c, l)), (d = a);
             do {
               switch (d.tag) {
                 case 3:
@@ -44764,7 +44791,7 @@
         } else c = null;
         (uo = { focusedElem: l, selectionRange: c }),
           (ln = !1),
-          (Rc = null),
+          (Nc = null),
           (Ic = !1),
           (bc = r);
         do {
@@ -44775,7 +44802,7 @@
             su(bc, S), (bc = bc.nextEffect);
           }
         } while (null !== bc);
-        (Rc = null), (bc = r);
+        (Nc = null), (bc = r);
         do {
           try {
             for (l = e; null !== bc; ) {
@@ -44925,10 +44952,10 @@
       for (; null !== bc; ) {
         var e = bc.alternate;
         Ic ||
-          null === Rc ||
+          null === Nc ||
           (0 !== (8 & bc.flags)
-            ? at(bc, Rc) && (Ic = !0)
-            : 13 === bc.tag && Xl(e, bc) && at(bc, Rc) && (Ic = !0));
+            ? at(bc, Nc) && (Ic = !0)
+            : 13 === bc.tag && Xl(e, bc) && at(bc, Nc) && (Ic = !0));
         var t = bc.flags;
         0 !== (256 & t) && Ul(e, bc),
           0 === (512 & t) ||
@@ -45001,7 +45028,7 @@
       return (tc = t), mi(), !0;
     }
     function uu(e, t, n) {
-      (t = Nl(n, t)),
+      (t = Rl(n, t)),
         (t = Ml(e, t, 1)),
         Ii(e, t),
         (t = Mc()),
@@ -45023,7 +45050,7 @@
               ('function' === typeof r.componentDidCatch &&
                 (null === Oc || !Oc.has(r)))
             ) {
-              e = Nl(t, e);
+              e = Rl(t, e);
               var o = Ll(n, e, 1);
               if ((Ii(n, o), (o = Mc()), (n = Dc(n, 1)), null !== n))
                 Zt(n, 1, o), Uc(n, o);
@@ -45102,7 +45129,7 @@
     function yu(e) {
       if ('function' === typeof e) return vu(e) ? 1 : 0;
       if (void 0 !== e && null !== e) {
-        if (((e = e.$$typeof), e === N)) return 11;
+        if (((e = e.$$typeof), e === R)) return 11;
         if (e === M) return 14;
       }
       return 2;
@@ -45160,11 +45187,11 @@
               (e.lanes = i),
               e
             );
-          case R:
+          case N:
             return (
               (e = hu(13, n, t, o)),
-              (e.type = R),
-              (e.elementType = R),
+              (e.type = N),
+              (e.elementType = N),
               (e.lanes = i),
               e
             );
@@ -45183,7 +45210,7 @@
                 case _:
                   l = 9;
                   break e;
-                case N:
+                case R:
                   l = 11;
                   break e;
                 case M:
@@ -45299,7 +45326,7 @@
       } else n = Mo;
       return (
         null === t.context ? (t.context = n) : (t.pendingContext = n),
-        (t = Ri(i, l)),
+        (t = Ni(i, l)),
         (t.payload = { element: e }),
         (r = void 0 === r ? null : r),
         null !== r && (t.callback = r),
@@ -45364,7 +45391,7 @@
           (8 !== e.nodeType || ' react-mount-point-unstable ' !== e.nodeValue))
       );
     }
-    function Nu(e, t) {
+    function Ru(e, t) {
       if (
         (t ||
           ((t = e
@@ -45378,7 +45405,7 @@
         for (var n; (n = e.lastChild); ) e.removeChild(n);
       return new Au(e, 0, t ? { hydrate: !0 } : void 0);
     }
-    function Ru(e, t, n, r, o) {
+    function Nu(e, t, n, r, o) {
       var i = n._reactRootContainer;
       if (i) {
         var a = i._internalRoot;
@@ -45392,7 +45419,7 @@
         Eu(t, a, e, o);
       } else {
         if (
-          ((i = n._reactRootContainer = Nu(n, r)),
+          ((i = n._reactRootContainer = Ru(n, r)),
           (a = i._internalRoot),
           'function' === typeof o)
         ) {
@@ -45560,7 +45587,7 @@
             ((r = t.pendingProps),
             (o = t.memoizedState),
             (o = null !== o ? o.element : null),
-            Ni(e, t),
+            Ri(e, t),
             Li(t, r, null, n),
             (r = t.memoizedState.element),
             r === o)
@@ -45653,7 +45680,7 @@
                     for (var s = u.firstContext; null !== s; ) {
                       if (s.context === r && 0 !== (s.observedBits & i)) {
                         1 === c.tag &&
-                          ((s = Ri(-1, n & -n)), (s.tag = 2), Ii(c, s)),
+                          ((s = Ni(-1, n & -n)), (s.tag = 2), Ii(c, s)),
                           (c.lanes |= n),
                           (s = c.alternate),
                           null !== s && (s.lanes |= n),
@@ -45871,18 +45898,18 @@
       }),
       (t.hydrate = function (e, t, n) {
         if (!_u(t)) throw Error(a(200));
-        return Ru(null, e, t, !0, n);
+        return Nu(null, e, t, !0, n);
       }),
       (t.render = function (e, t, n) {
         if (!_u(t)) throw Error(a(200));
-        return Ru(null, e, t, !1, n);
+        return Nu(null, e, t, !1, n);
       }),
       (t.unmountComponentAtNode = function (e) {
         if (!_u(e)) throw Error(a(40));
         return (
           !!e._reactRootContainer &&
           (qc(function () {
-            Ru(null, null, e, !1, function () {
+            Nu(null, null, e, !1, function () {
               (e._reactRootContainer = null), (e[xo] = null);
             });
           }),
@@ -45900,7 +45927,7 @@
       (t.unstable_renderSubtreeIntoContainer = function (e, t, n, r) {
         if (!_u(n)) throw Error(a(200));
         if (null == e || void 0 === e._reactInternals) throw Error(a(38));
-        return Ru(e, t, n, !1, r);
+        return Nu(e, t, n, !1, r);
       }),
       (t.version = '17.0.2');
   },
@@ -46015,7 +46042,11 @@
       return Object(l['jsxs'])('div', {
         className: o.a.contact_us,
         children: [
-          Object(l['jsx'])(i['a'], { showBack: !1, title: 'Contact' }),
+          Object(l['jsx'])(i['a'], {
+            showBack: !1,
+            title: 'Contact',
+            type: 'contact',
+          }),
           Object(l['jsx'])('section', {
             className: o.a.topic,
             children: Object(l['jsx'])('h2', {

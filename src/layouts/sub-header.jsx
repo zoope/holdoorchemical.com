@@ -7,6 +7,7 @@ import { withRouter } from 'react-router';
 export default withRouter(function SubHeader({
   title,
   showBack = true,
+  type = 'products',
   ...others
 }) {
   const handleBack = () => {
@@ -48,9 +49,17 @@ export default withRouter(function SubHeader({
     });
   };
 
+  const bgConfig = {
+    products: 'banner_0',
+    contact: 'banner_1',
+  };
+
   return (
     <Fragment>
-      <section className={styles.top}>
+      <section
+        className={styles.top}
+        style={{ backgroundImage: `url(/images/icon/${bgConfig[type]}.png)` }}
+      >
         <div className={styles.content}>
           <h1>{title}</h1>
           {showBack && (

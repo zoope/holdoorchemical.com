@@ -20,13 +20,20 @@ export default function Homepage() {
   return (
     <div>
       <section className={style.banner}>
-        <div className={style.bg}></div>
         <div className={style.carousel}>
           <span className={style['left-arrow']} onClick={prev}></span>
           <span className={style['right-arrow']} onClick={next}></span>
-          <Carousel autoplay autoplaySpeed={5000} ref={CarouselRef}>
+          <Carousel
+            autoplay
+            autoplaySpeed={5000}
+            ref={CarouselRef}
+            effect="fade"
+          >
             {homeCfg.banner.map((item, index) => (
-              <div className={style.item} key={index}>
+              <div
+                className={`${style.item} ${style['banner-' + index]}`}
+                key={index}
+              >
                 <div className={style.wrap}>
                   <h3>{item.text}</h3>
                 </div>

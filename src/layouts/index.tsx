@@ -31,6 +31,17 @@ const expendArray = (arr: any, parent?: any) => {
 };
 expendArray(categories);
 
+const mergeCategory = (categoryList: any, productsList: any) => {
+  categoryList[0].children.forEach((category: any) => {
+    productsList.forEach((product: any) => {
+      if (product.category.includes(category.code)) {
+        category.children.push(product);
+      }
+    });
+  });
+};
+mergeCategory(categories, products);
+
 // @ts-ignore
 window.products = products;
 // @ts-ignore
@@ -64,12 +75,21 @@ export default (props: any) => {
               HOME
             </Menu.Item>
             {categories[0].children.map((category) => (
-              <Menu.Item
+              <Menu.SubMenu
                 key={`/category/${category.code}`}
-                onClick={() => pushRoute(`/category/${category.code}`)}
+                title={category.title}
+                onTitleClick={() => pushRoute(`/category/${category.code}`)}
               >
-                {category.title}
-              </Menu.Item>
+                {category.children &&
+                  category.children.map((product: any) => (
+                    <Menu.Item
+                      key={`/category/${product.code}`}
+                      onClick={() => pushRoute(`/product/${product.code}`)}
+                    >
+                      {product.title}
+                    </Menu.Item>
+                  ))}
+              </Menu.SubMenu>
             ))}
             <Menu.Item
               key="/contact_us"

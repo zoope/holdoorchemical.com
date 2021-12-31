@@ -19,7 +19,6 @@ export default function Contact(props) {
       <div className={styles.email}>
         {emails.map((email) => (
           <div key={email.name}>
-            <div>{email.name}</div>
             <a href={`mailto:${email.email}`}>{email.email}</a>
           </div>
         ))}

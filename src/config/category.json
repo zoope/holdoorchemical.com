@@ -7,13 +7,15 @@
         "code": "10001",
         "title": "SILICONE",
         "image": "/images/icon/COVID-19.PNG",
-        "color": "#1faead"
+        "color": "#1faead",
+        "children": []
       },
       {
         "code": "10002",
         "title": "SURFACTANT",
         "image": "/images/icon/IVD  PRODUCT.PNG",
-        "color": "#1faead"
+        "color": "#1faead",
+        "children": []
       }
     ]
   }

@@ -5,7 +5,7 @@ import Contact from './contact';
 export default function ContactPage() {
   return (
     <div className={styles.contact_us}>
-      <SubHeader showBack={false} title="Contact" />
+      <SubHeader showBack={false} title="Contact" type="contact" />
       <section className={styles.topic}>
         <h2>Get in touch with us</h2>
       </section>
