@@ -5,123 +5,15 @@
     "children": [
       {
         "code": "10001",
-        "title": "COVID-19",
+        "title": "SILICONE",
         "image": "/images/icon/COVID-19.PNG",
-        "color": "#1faead",
-        "children": [
-          {
-            "code": "20001",
-            "title": "COVID-19 Combined Rapid Test"
-          },
-          {
-            "code": "20002",
-            "title": "Ventilator"
-          },
-          {
-            "code": "20003",
-            "title": "HFNC"
-          },
-          {
-            "code": "20004",
-            "title": "Oxygen Concentrator"
-          },
-          {
-            "code": "20005",
-            "title": "Fingertip pulse oximeter"
-          },
-          {
-            "code": "20006",
-            "title": "VTM tube"
-          }
-        ]
+        "color": "#1faead"
       },
       {
         "code": "10002",
-        "title": "IVD PRODUCT",
+        "title": "SURFACTANT",
         "image": "/images/icon/IVD  PRODUCT.PNG",
-        "color": "#1faead",
-        "children": [
-          {
-            "code": "20007",
-            "title": "Hematology"
-          },
-          {
-            "code": "20008",
-            "title": "Biochemistry"
-          },
-          {
-            "code": "20009",
-            "title": "Urine chemistry"
-          }
-        ]
-      },
-      {
-        "code": "10003",
-        "title": "HEALTHCARE & MONITORING",
-        "image": "/images/icon/HEALTHCARE& MONITORING.PNG",
-        "color": "#1faead",
-        "children": [
-          {
-            "code": "20010",
-            "title": "Medical grade HEPA"
-          },
-          {
-            "code": "20011",
-            "title": "Nursing Series"
-          },
-          {
-            "code": "20013",
-            "title": "X-ray"
-          }
-        ]
-      },
-      {
-        "code": "10004",
-        "title": "LABORATORY EQUIPMENTS",
-        "image": "/images/icon/LABORATORY EQUIPMENT.PNG",
-        "color": "#1faead",
-        "children": [
-          {
-            "code": "20014",
-            "title": "Centrifuge"
-          },
-          {
-            "code": "20015",
-            "title": "UV Sterilizer"
-          },
-          {
-            "code": "20016",
-            "title": "Electronic balance"
-          },
-          {
-            "code": "20017",
-            "title": "PH Meter"
-          },
-          {
-            "code": "20018",
-            "title": "Autoclave"
-          },
-          {
-            "code": "20019",
-            "title": "Hot Air Drying Oven"
-          },
-          {
-            "code": "20020",
-            "title": "Blood collection tube"
-          }
-        ]
-      },
-      {
-        "code": "10005",
-        "title": "VETERINARY",
-        "image": "/images/icon/VETERINARY.PNG",
-        "color": "#1faead",
-        "children": [
-          {
-            "code": "20022",
-            "title": "Hematology Analyzer for Vet"
-          }
-        ]
+        "color": "#1faead"
       }
     ]
   }

@@ -1,7 +1,7 @@
 import styles from './index.less';
 import { history } from 'umi';
 import SubHeader from '../../layouts/sub-header';
-import Contact from '../contact/contact';
+// import Contact from '../contact/contact';
 
 export default function Product(props) {
   const {
@@ -15,10 +15,10 @@ export default function Product(props) {
     <div>
       <SubHeader title={productData.title} />
       <div className={styles.main}>
-        <section className={styles['left-side']}>
+        {/* <section className={styles['left-side']}>
           <div className={styles.title}>Contact us</div>
           <Contact />
-        </section>
+        </section> */}
         <section className={styles.product}>
           <div
             className={styles.image}

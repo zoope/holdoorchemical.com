@@ -51,7 +51,7 @@ export default (props: any) => {
         <div className={style.container}>
           <div className={style.logo}>
             <img src="/images/icon/logo.png" alt="" />
-            <span>Holdoor Medical</span>
+            <span>Holdoor Chemical</span>
           </div>
           <Menu
             mode="horizontal"
@@ -64,21 +64,12 @@ export default (props: any) => {
               HOME
             </Menu.Item>
             {categories[0].children.map((category) => (
-              <Menu.SubMenu
+              <Menu.Item
                 key={`/category/${category.code}`}
-                title={category.title}
-                onTitleClick={() => pushRoute(`/category/${category.code}`)}
+                onClick={() => pushRoute(`/category/${category.code}`)}
               >
-                {category.children &&
-                  category.children.map((subCategory) => (
-                    <Menu.Item
-                      key={`/category/${subCategory.code}`}
-                      onClick={() => pushRoute(`/category/${subCategory.code}`)}
-                    >
-                      {subCategory.title}
-                    </Menu.Item>
-                  ))}
-              </Menu.SubMenu>
+                {category.title}
+              </Menu.Item>
             ))}
             <Menu.Item
               key="/contact_us"
@@ -92,7 +83,7 @@ export default (props: any) => {
       <div className={style['content-wrap']}>{props.children}</div>
       <footer className={style.footer}>
         <div className={style.container}>
-          <span>HOLDOOR MEDICAL 2021</span>
+          <span>HOLDOOR CHEMICAL 2021</span>
         </div>
       </footer>
     </>

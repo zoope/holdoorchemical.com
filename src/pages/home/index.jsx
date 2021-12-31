@@ -38,7 +38,7 @@ export default function Homepage() {
       <section className={style.contact}>
         <div className={style.container}>
           <div>
-            We provide high quality medical instruments worldwide.{' '}
+            We provide high quality chemical worldwide.{' '}
             <a href="/category/0">more</a>
           </div>
           <div>
@@ -49,27 +49,27 @@ export default function Homepage() {
           <div>
             Need support? Send us an E-mail
             <br />
-            <a href="mailto:sales@holdoormedical.com">
-              sales@holdoormedical.com
+            <a href="mailto:sales@holdoorchemical.com">
+              sales@holdoorchemical.com
             </a>
           </div>
         </div>
       </section>
-      <section className={style.category}>
-        {categoryCfg.map((item, index) => (
-          <a
-            className={style.item}
-            key={index}
-            onClick={() => history.push(`/category/${item.code}`)}
-          >
-            <div className={style.img}>
-              <img src={item.image} />
-            </div>
-            <div className={style.title} style={{ color: item.color }}>
-              {item.title}
-            </div>
-          </a>
-        ))}
+      <section className={style.aboutus}>
+        <h2>About Us</h2>
+        <p>
+          Ningbo Holdoor Chemical Co., Ltd Is a professional chemical supplier,
+          our products include silicones, textile auxiliaries, surfactants, etc.
+          <br />
+          Founded in 2010,we growing rapidly in the past 10 years. In addition
+          to the Ningbo headquarters, we have offices, factory as well as
+          warehouses in Guangzhou, Shanghai and Jiangsu.
+          <br />
+          Our international business started in 2019 and now we have partners in
+          21 contries. We are doing our best to bring better chemical solutions
+          to more customers through our professional services and high-quality
+          products.
+        </p>
       </section>
     </div>
   );

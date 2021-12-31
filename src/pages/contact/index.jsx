@@ -11,7 +11,7 @@ export default function ContactPage() {
       </section>
       <div className={styles.wrap}>
         <div>
-          <div className={styles.company}>Ningbo Holdoor Medical Co., Ltd</div>
+          <div className={styles.company}>Ningbo Holdoor Chemical Co., Ltd</div>
           <Contact size="big" />
         </div>
       </div>
