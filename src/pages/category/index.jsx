@@ -37,18 +37,6 @@ export default function CategoryPage(props) {
       <SubHeader title={categoryData.title} />
       <div className={styles.content}>
         <section className={styles['left-side']}>
-          <div className={styles['category-list']}>
-            <div className={styles.title}>Category</div>
-            {categoryData.children
-              ? categoryData.children.map((subCategory) => (
-                  <li key={subCategory.code}>
-                    <a href={`/category/${subCategory.code}`}>
-                      {subCategory.title}
-                    </a>
-                  </li>
-                ))
-              : null}
-          </div>
           <div>
             <div className={styles.title}>Contact us</div>
             <Contact />

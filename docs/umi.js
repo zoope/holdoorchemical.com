@@ -28472,42 +28472,17 @@
           Object(l['jsxs'])('div', {
             className: i.a.content,
             children: [
-              Object(l['jsxs'])('section', {
+              Object(l['jsx'])('section', {
                 className: i.a['left-side'],
-                children: [
-                  Object(l['jsxs'])('div', {
-                    className: i.a['category-list'],
-                    children: [
-                      Object(l['jsx'])('div', {
-                        className: i.a.title,
-                        children: 'Category',
-                      }),
-                      c.children
-                        ? c.children.map((e) =>
-                            Object(l['jsx'])(
-                              'li',
-                              {
-                                children: Object(l['jsx'])('a', {
-                                  href: '/category/'.concat(e.code),
-                                  children: e.title,
-                                }),
-                              },
-                              e.code,
-                            ),
-                          )
-                        : null,
-                    ],
-                  }),
-                  Object(l['jsxs'])('div', {
-                    children: [
-                      Object(l['jsx'])('div', {
-                        className: i.a.title,
-                        children: 'Contact us',
-                      }),
-                      Object(l['jsx'])(a['a'], {}),
-                    ],
-                  }),
-                ],
+                children: Object(l['jsxs'])('div', {
+                  children: [
+                    Object(l['jsx'])('div', {
+                      className: i.a.title,
+                      children: 'Contact us',
+                    }),
+                    Object(l['jsx'])(a['a'], {}),
+                  ],
+                }),
               }),
               Object(l['jsxs'])('section', {
                 className: i.a['product-list'],
