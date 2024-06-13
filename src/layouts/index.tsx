@@ -61,7 +61,7 @@ export default (props: any) => {
       <header className={`${style.header} ${headerActive ? style.active : ''}`}>
         <div className={style.container}>
           <div className={style.logo}>
-            <img src="/images/icon/logo.png" alt="" />
+            <img src="/images/icon/logo.svg" alt="" />
             <span>Holdoor Chemical</span>
           </div>
           <Menu
