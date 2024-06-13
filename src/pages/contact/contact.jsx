@@ -3,8 +3,8 @@ import styles from './index.less';
 
 const emails = [
   {
-    name: 'Sales',
-    email: 'sales@holdoorchemical.com',
+    name: 'Holdoor',
+    email: 'holdoor@foxmail.com',
   },
 ];
 

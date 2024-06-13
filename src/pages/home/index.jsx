@@ -56,8 +56,8 @@ export default function Homepage() {
           <div>
             Need support? Send us an E-mail
             <br />
-            <a href="mailto:sales@holdoorchemical.com">
-              sales@holdoorchemical.com
+            <a href="mailto:holdoor@foxmail.com">
+              holdoor@foxmail.com
             </a>
           </div>
         </div>
@@ -65,17 +65,17 @@ export default function Homepage() {
       <section className={style.aboutus}>
         <h2>About Us</h2>
         <p>
-          Ningbo Holdoor Chemical Co., Ltd Is a professional chemical supplier,
-          our products include silicones, textile auxiliaries, surfactants, etc.
+          Founded in 2010, Ningbo Holdoor chemical has led the steady growth based on its integrity and hard work.
           <br />
-          Founded in 2010,we growing rapidly in the past 10 years. In addition
-          to the Ningbo headquarters, we have offices, factory as well as
-          warehouses in Guangzhou, Shanghai and Jiangsu.
+          At holdoor chemicals, we take pride in offering an extensive selection of silicone and surfactant,
           <br />
-          Our international business started in 2019 and now we have partners in
-          21 contries. We are doing our best to bring better chemical solutions
-          to more customers through our professional services and high-quality
-          products.
+          including silicone fluid, emulsion, defoamer, softener, and various kinds of surfactant.
+          <br />
+          Over the years, Holdoor Chemical has continued to innovate and optimize its products.
+          <br />
+          It now has a complete production, warehousing, distribution center, after-sales and technical support platform. 
+          <br />
+          We are dedicated to teailor our products to meet your unique application needs.
         </p>
       </section>
     </div>
